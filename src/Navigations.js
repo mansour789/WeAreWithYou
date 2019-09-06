@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Home from './screens/tabs/Home';
 import Post from './Post';
 import LoginView from './screens/tabs/LoginView';
-import NewPost from './NewPost'
+import NewComment from './NewComment'
 import {Icon} from 'native-base'
 import AccountScreen from './screens/tabs/AccountScreen'
 import OnePost from './OnePost'
@@ -50,8 +50,8 @@ const  Apppw = createBottomTabNavigator({
         )
       },
     },   
-    NewPost: {
-      screen: NewPost,
+    NewComment: {
+      screen: NewComment,
       navigationOptions: {
         tabBarIcon: ({ focused, horizontal, tintColor }) => (
           <Icon name="ios-options" size={30} color="#900" />

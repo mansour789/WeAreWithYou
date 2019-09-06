@@ -30,7 +30,8 @@ export default class NewPost extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: undefined
+      selected: undefined,
+      post: ''
     };
   }
   onValueChange = value => {
@@ -89,12 +90,12 @@ export default class NewPost extends Component {
             </CardItem>
             <CardItem transparent>
               <Form>
-                <Textarea rowSpan={8} placeholder="اكتب حكايتك هنا" />
+                <Textarea onChangeText={post => this.setState({post})} rowSpan={8} placeholder="اكتب حكايتك هنا" />
               </Form>
             </CardItem>
             <CardItem style={{justifyContent: "center", alignItems: "center",}}>
              
-              <Button  style={{backgroundColor: "#C53364", borderRadius:30, padding: 4, paddingLeft: 40, paddingRight: 40}} onPress={() => alert("Click Like")}>
+              <Button  style={{backgroundColor: "#C53364", borderRadius:30, padding: 4, paddingLeft: 40, paddingRight: 40}} onPress={() => alert(this.state.post)}>
                   <Text style={{ margin: 5, color: 'white', paddingLeft: 3, paddingRight: 3, }}>انشر</Text>
                 </Button>
             
@@ -103,33 +104,7 @@ export default class NewPost extends Component {
           </Card>
         </Content>
       </Container>
-      //   <View style={styles.container}>
-      //     <View style={styles.inputContainer}>
-      //       <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/>
-      //       <TextInput style={styles.inputs}
-      //           placeholder="اسم مستعار"
-      //           // keyboardType="email-address"
-      //           underlineColorAndroid='transparent'
-      //           onChangeText={(userName) => this.setState({userName})}/>
-      //     </View>
-
-      //     <View style={styles.inputContainer}>
-      //       <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/key-2/ultraviolet/50/3498db'}}/>
-      //       <TextInput style={styles.inputs}
-      //           placeholder="كلمة السر"
-      //           secureTextEntry={true}
-      //           underlineColorAndroid='transparent'
-      //           onChangeText={(password) => this.setState({password})}/>
-      //     </View>
-
-      //     <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={() => this.logIn()}>
-      //       <Text style={styles.loginText}>Login</Text>
-      //     </TouchableHighlight>
-
-      //     <TouchableHighlight style={styles.buttonContainer} onPress={() => alert("go to sign up")}>
-      //         <Text style={{color: 'white'}}>Register</Text>
-      //     </TouchableHighlight>
-      //   </View>
+      
     );
   }
 }
