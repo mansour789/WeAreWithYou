@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Home from './screens/tabs/Home';
 import Post from './Post';
 import LoginView from './screens/tabs/LoginView';
-import SignUp from './screens/tabs/SignUp'
+import NewPost from './NewPost'
 import {Icon} from 'native-base'
 import AccountScreen from './screens/tabs/AccountScreen'
 import OnePost from './OnePost'
@@ -50,8 +50,8 @@ const  Apppw = createBottomTabNavigator({
         )
       },
     },   
-    SignUp: {
-      screen: SignUp,
+    NewPost: {
+      screen: NewPost,
       navigationOptions: {
         tabBarIcon: ({ focused, horizontal, tintColor }) => (
           <Icon name="ios-options" size={30} color="#900" />
@@ -62,7 +62,7 @@ const  Apppw = createBottomTabNavigator({
       screen: LoginView,
       navigationOptions: {
         tabBarIcon: ({ focused, horizontal, tintColor }) => (
-          <Icon name="ios-options" size={30} color="#900" />
+          <Icon name="ios-options" size={30} color="gray" />
         )
       },
     },   
@@ -70,7 +70,7 @@ const  Apppw = createBottomTabNavigator({
       screen: AccountScreen,
       navigationOptions: {
         tabBarIcon: ({ focused, horizontal, tintColor }) => (
-          <Icon name="ios-options" size={30} color="#900" />
+          <Icon name="ios-options" size={30} color="gray" />
         )
       },
     }
@@ -78,7 +78,7 @@ const  Apppw = createBottomTabNavigator({
   { 
     initialRouteName : "Home", 
     tabBarOptions: {
-      activeTintColor: 'tomato',
+      activeTintColor: '#C53364',
       inactiveTintColor: 'gray',
       activeBackgroundColor: 'white'
     },
