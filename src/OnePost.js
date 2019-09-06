@@ -33,7 +33,7 @@ import { CommentsData } from '../DummyData'
               <Left>
                 <Thumbnail source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTggdND5xYxohjHJV_i8nO0EUplyrJHxDDxiHq6tboI184Oaezw'}} />
                 <Body>
-                  <Text>{ownerName}</Text>
+                  <Text style={{fontSize: 20, fontWeight: "500", marginBottom: 4}}>{ownerName}</Text>
                   
                 </Body>
               </Left>
@@ -44,15 +44,14 @@ import { CommentsData } from '../DummyData'
             <CardItem>
               <Left>
                 <Button  transparent onPress={()=> alert("Click Like")}>
-                  <Text>{likes}</Text>
+                  <Text style={{margin: 5}}>{likes}</Text>
                   <Icon active name="thumbs-up" />
                 </Button>
               </Left>
               <Body>
                 <Button  transparent onPress={()=> this.setState({showComment: true})}>
-                    
-                  <Text>{this.state.commentLength ? this.state.commentLength : "0"} comments</Text>
-                  <Icon active  name="chatbubbles" />
+                  <Text style={{flex: 1}}>{this.state.commentLength ? this.state.commentLength : "0"} تعليقات</Text>
+                  <Icon active  name="chatbubbles" style={{flex: 1}} />
                 </Button>
               </Body>
               <Right>

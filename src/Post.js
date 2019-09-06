@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, FlatList } from "react-native";
+import { Text, View, FlatList, Platform } from "react-native";
 import {
   Container,
   Header,
@@ -13,6 +13,7 @@ import {
   Button,
   Title
 } from "native-base";
+import Icon from "react-native-vector-icons/Ionicons";
 import DetelesPost from "./DetelesPost";
 import { PostsData } from "../DummyData";
 
@@ -29,11 +30,29 @@ export class Post extends Component {
     const name = navigation.getParam("name");
     return (
       <>
-        <Header>
-          <Text>{name}</Text>
-        </Header>
         <Container>
           <Content>
+            <View
+              style={{
+                flex: 1,
+                backgroundColor: "white",
+                borderBottomWidth: 1,
+                borderBottomColor: "#dddddd"
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 30,
+                  fontWeight: "600",
+                  textAlign: "center",
+                  flex: 1,
+                  margin: 10
+                }}
+              >
+                {name}
+              </Text>
+            </View>
+
             <List>
               <FlatList
                 data={PostsData.posts}
@@ -53,7 +72,6 @@ export class Post extends Component {
             </List>
           </Content>
         </Container>
-       
       </>
     );
   }

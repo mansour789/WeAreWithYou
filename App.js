@@ -10,7 +10,7 @@ export default class App extends React.Component {
   render() {
     return (
       
-        <Navigations style={styles.container}/>
+        <Navigations />
    
      
       
@@ -18,9 +18,3 @@ export default class App extends React.Component {
   }
 }
 
-const styles = {
-  container: {
-    
-    marginTop: Platform.OS === "android" ? 24 : 0
-  }
-};

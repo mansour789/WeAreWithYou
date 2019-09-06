@@ -24,7 +24,7 @@ import { Container, Header, Content, Card, CardItem, Thumbnail, Button, Icon, Le
                   <Left>
                     <Button transparent onPress={()=> alert("Click Like")}>
                       <Icon active name="thumbs-up" />
-                      <Text>{likes}</Text>
+                      <Text style={{margin: 5}}>{likes}</Text>
                     </Button>
                   </Left>
                   <Right>

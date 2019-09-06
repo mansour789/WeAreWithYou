@@ -18,12 +18,12 @@ export default class ListPost extends Component {
                 <Thumbnail square source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTggdND5xYxohjHJV_i8nO0EUplyrJHxDDxiHq6tboI184Oaezw' }} />
               </Left>
               <Body>
-                <Text>{this.props.ownerName}</Text>
+                <Text style={{fontSize: 20, fontWeight: "500", marginBottom: 4}}>{this.props.ownerName}</Text>
                 <Text note numberOfLines={3}>{this.props.content}   er encedif ference differen cedifferen cedifferencedifference . .</Text>
               </Body>
               <Right>
-                <Button transparent onPress={()=>this.seePost()}>
-                  <Text>View</Text>
+                <Button  bordered primary onPress={()=>this.seePost()}>
+                  <Text style={{color: "#0960FF", paddingLeft:5, paddingRight: 5, margin: 3}}>شاهد</Text>
                 </Button>
               </Right>
             </ListItem>
