@@ -1,11 +1,12 @@
 import React from 'react'
+import {Image} from 'react-native'
 import { createStackNavigator } from 'react-navigation-stack';
 import {  createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Home from './screens/tabs/Home';
 import Post from './Post';
 import LoginView from './screens/tabs/LoginView';
-import NewComment from './NewComment'
+import Personal from './Personal'
 import {Icon} from 'native-base'
 import AccountScreen from './screens/tabs/AccountScreen'
 import OnePost from './OnePost'
@@ -46,34 +47,38 @@ const  Apppw = createBottomTabNavigator({
       screen: homeStack,
       navigationOptions: {
         tabBarIcon: ({ focused, horizontal, tintColor }) => (
-          <Icon name="home" size={30} color="#900" />
+          <Icon name="ios-home" size={30} style={{ color: 'gray'}} />
         )
       },
     },   
-    NewComment: {
-      screen: NewComment,
+    // AccountScreen: {
+    //   screen: AccountScreen,
+    //   navigationOptions: {
+    //     tabBarIcon: ({ focused, horizontal, tintColor }) => (
+    //       <Icon name="ios-options" size={30} style={{ color: 'gray'}} />
+    //     )
+    //   },
+    // },   
+    Personal: {
+      screen: Personal,
       navigationOptions: {
         tabBarIcon: ({ focused, horizontal, tintColor }) => (
-          <Icon name="ios-options" size={30} color="#900" />
+          <Icon name="ios-person" size={30} style={{ color: 'gray'}} />
+          
         )
       },
-    },   
-    LoginView: {
+    },
+    About: {
       screen: LoginView,
       navigationOptions: {
-        tabBarIcon: ({ focused, horizontal, tintColor }) => (
-          <Icon name="ios-options" size={30} color="gray" />
+        showLabel: false,
+        tabBarIcon: ({ tintColor }) => (
+          <Image source={require('../assets/logo.png')} style={{width: 45, height: 30}} />
         )
+        
       },
-    },   
-    MySittiong: {
-      screen: AccountScreen,
-      navigationOptions: {
-        tabBarIcon: ({ focused, horizontal, tintColor }) => (
-          <Icon name="ios-options" size={30} color="gray" />
-        )
-      },
-    }
+    } 
+    
   },    
   { 
     initialRouteName : "Home", 
