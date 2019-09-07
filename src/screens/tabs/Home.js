@@ -5,11 +5,33 @@ import {
 import { Button, View } from "native-base";
 import Catagories from '../../Catagories'
 import StartPage from "../../StartPage";
-import {categoriesData} from '../../../DummyData';
-import {PostProvidor, PostContext} from '../../context';
+import axios from 'axios';
+import SpinnerLoading from '../../SpinnerLoading';
+import apiUrl from '../../ApiConfig'
+
+
+// import {categoriesData} from '../../../DummyData';
+
 
 export class Home extends React.Component {
-  
+
+  state={
+    categoriesData: [],
+    loading: true
+  }
+  componentDidMount(){
+      axios.get(`${apiUrl}/categories`)
+      .then(res=>{
+          console.log(res)
+          this.setState({
+            categoriesData: res.data.categories,
+            loading: false
+          })
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
   
   render() {
     return (
@@ -27,12 +49,16 @@ export class Home extends React.Component {
           
     
      <View style={styles.flat}> 
-        <FlatList
-        numColumns={2} 
-        data={categoriesData.categories}  
-        keyExtractor={(item =>item.id)}
-  renderItem={({item}) => <Catagories  id={item.id} name={item.name} navigation={this.props.navigation} />}
+     {this.state.loading ? <SpinnerLoading/> : (
+
+
+       <FlatList
+       numColumns={2} 
+       data={this.state.categoriesData}  
+       keyExtractor={(item =>item.id)}
+       renderItem={({item}) => <Catagories  id={item.id} name={item.name} navigation={this.props.navigation} />}
 /> 
+       )}
 
 
  </View>

@@ -19,7 +19,7 @@ export default class ListPost extends Component {
               </Left>
               <Body>
                 <Text style={{fontSize: 20, fontWeight: "500", marginBottom: 4}}>{this.props.ownerName}</Text>
-                <Text note numberOfLines={3}>{this.props.content}   er encedif ference differen cedifferen cedifferencedifference . .</Text>
+                <Text note numberOfLines={3}>{this.props.content}  </Text>
               </Body>
               <Right>
                 <Button  bordered primary onPress={()=>this.seePost()}>

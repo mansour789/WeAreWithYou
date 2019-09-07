@@ -1,10 +1,10 @@
 import React from "react";
 import { Text, ImageBackground } from "react-native";
 import { Button } from "native-base";
-import {PostsContext} from './context'
+
 
 export class Catagories extends React.Component {
-  static contextType = PostsContext;
+  
   constructor(props) {
     super(props)
   
@@ -13,9 +13,8 @@ export class Catagories extends React.Component {
     }
   }
   seePosts = ()=>{
-    // console.log(this.context)
-    // this.context.getPosts(this.props.id);
-  this.props.navigation.navigate("Post", {name: this.props.name})
+
+  this.props.navigation.navigate("Post", {name: this.props.name, id: this.props.id})
   }
   
   render() {
