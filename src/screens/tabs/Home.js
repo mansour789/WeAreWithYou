@@ -65,7 +65,7 @@ constructor(props) {
        numColumns={2} 
        data={this.state.categoriesData}  
        keyExtractor={(item =>item.id)}
-       renderItem={({item}) => <Catagories  id={item.id} name={item.name} navigation={this.props.navigation} />}
+       renderItem={({item}) => <Catagories  id={item.id} name={item.name} navigation={this.props.navigation} topics={this.state.categoriesData}/>}
 /> 
        )}
 

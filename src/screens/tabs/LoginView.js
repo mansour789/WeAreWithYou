@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import axios from "axios";
 import apiUrl from "../../ApiConfig";
+// import Navigations from "../../Navigations";
 
 const ACCESS_TOKEN = "access_token";
 
@@ -37,22 +38,22 @@ export default class LoginView extends Component {
   };
 
   loginUser = (userName, password) => {
+    screenProps = this.props.screenProps;
     axios
       .post(`${apiUrl}/sign-in`, {
         credentials: {
           username: userName,
           password: password,
-          user: {}
+          
         }
       })
       .then(res => {
         console.log(res);
         // alert(`${res.data.user.username}, ${res.data.user.token}`)
-
-        this.setState({
-          user: res.data.user
-        });
+        screenProps.setUser(res.data.user)
+        
         this.saveToken(res.data.user.token);
+        
       })
       .catch(err => {
         console.log(err);
@@ -77,12 +78,6 @@ export default class LoginView extends Component {
     }
   }
 
-  // this.setState({
-  //   token: user.token
-  // })
-  // alert(user.token)
-  // console.log(this.state.user)
-  // }
 
   render() {
     return (
@@ -132,6 +127,7 @@ export default class LoginView extends Component {
         >
           <Text style={{ color: "white" }}>Register</Text>
         </TouchableHighlight>
+        
       </View>
     );
   }

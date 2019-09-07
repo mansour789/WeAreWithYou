@@ -46,9 +46,11 @@ class OnePost extends Component {
       
   }
   addComment = () => {
+    const { navigation } = this.props;
+    const id = navigation.getParam("id")
     if(this.props.screenProps.data){
       
-      this.props.navigation.navigate("NewComment")
+      this.props.navigation.navigate("NewComment", {id})
     }else{
       this.props.navigation.navigate("LoginView")
     }
@@ -85,7 +87,7 @@ class OnePost extends Component {
               </Left>
             </CardItem>
             <CardItem transparent>
-              <Text>{content} inside comment </Text>
+              <Text>{content}</Text>
             </CardItem>
             <CardItem>
               <Left>

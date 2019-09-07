@@ -8,9 +8,8 @@ import {
   Image,
   Alert
 } from "react-native";
-import { categoriesData } from "../DummyData";
+// import { categoriesData } from "../DummyData";
 import {
-  
   Form,
   Textarea,
   Container,
@@ -25,14 +24,18 @@ import {
   Body,
   Right
 } from "native-base";
-import ChooseTopic from "./screens/tabs/AccountScreen";
+import ChooseTopic from "./ChooseTopic";
+import axios from "axios";
+import apiUrl from './ApiConfig'
+
 
 export default class NewPost extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: '',
-      post: ''
+      selected: "",
+      post: "",
+      topics: []
     };
   }
   topicID = value => {
@@ -41,19 +44,55 @@ export default class NewPost extends Component {
     });
   };
 
+
   sendPost = () => {
-    alert(this.state.post)
+  
+    const config = {
+      headers: {'Authorization': `bearer ${this.props.screenProps.data}`}
+      
+    };
+    
+    if (this.state.post) {
+      axios.post(`${apiUrl}/categories/${this.state.selected}/posts`,{
+          post: {
+            content: this.state.post
+          }
+      },config).then(res => { 
+        if (res.status == 201){ 
+          
+          console.log(res)
+          alert("تم إرسال حكايتك بنجاح")
+          this.props.navigation.goBack();
+
+        }else{
+          alert(res.status)
+
+        }
+      }).catch(err=>{
+        alert(err)
+      })
+  
+    } else {
+      alert("لا يمكن إرسال محتوى فارغ");
+    }
+  };
+  componentDidMount() {
+    const { navigation } = this.props;
+    const id = navigation.getParam("id");
+    const topics = navigation.getParam("topics")
+    this.setState({ selected: id, topics });
   }
 
   render() {
-    
-
+    console.log(this.props.screenProps.user)
     return (
       <Container>
         <Content>
-            <Header style={{backgroundColor: "#5F2464"}}>
-                <Text style={{color: 'white', fontSize: 20, fontWeight: '500'}}>حكاية جديدة</Text>
-            </Header>
+          <Header style={{ backgroundColor: "#5F2464" }}>
+            <Text style={{ color: "white", fontSize: 20, fontWeight: "500" }}>
+              حكاية جديدة
+            </Text>
+          </Header>
           <Card>
             <CardItem>
               <Left>
@@ -67,47 +106,58 @@ export default class NewPost extends Component {
                   <Text
                     style={{ fontSize: 20, fontWeight: "500", marginBottom: 4 }}
                   >
-                    User Here
+                    {this.props.screenProps.user.username}
                   </Text>
                 </Body>
               </Left>
             </CardItem>
             {/* <CardItem><Text>{this.state.selected}</Text></CardItem> */}
             <CardItem transparent>
-              {/* <Form>
-                <Picker
-                  mode="dropdown"
-                  placeholder="اختر مجموعة"
-                  iosIcon={<Icon name="arrow-down" />}
-                  headerStyle={{ backgroundColor: "#5F2464" }}
-                  headerBackButtonTextStyle={{ color: "#fff" }}
-                  headerTitleStyle={{ color: "#fff" }}
-                  selectedValue={this.state.selected}
-                  onValueChange={this.onValueChange}
-                >
-                  {piccker}
-                </Picker>
-              </Form> */}
-              <ChooseTopic topics={categoriesData.categories} topicID={this.topicID} selected={this.state.selected}/>
-              <Text>{this.state.selected}</Text>
+              <ChooseTopic
+                topics={this.state.topics}
+                topicID={this.topicID}
+                selected={this.state.selected}
+                
+              />
+              {/* <Text>{this.state.topics[0]}</Text> */}
             </CardItem>
             <CardItem transparent>
               <Form>
-                <Textarea onChangeText={post => this.setState({post})} rowSpan={8} placeholder="اكتب حكايتك هنا" />
+                <Textarea
+                  onChangeText={post => this.setState({ post })}
+                  rowSpan={8}
+                  placeholder="اكتب حكايتك هنا"
+                />
               </Form>
             </CardItem>
-            <CardItem style={{justifyContent: "center", alignItems: "center",}}>
-             
-              <Button  style={{backgroundColor: "#C53364", borderRadius:30, padding: 4, paddingLeft: 40, paddingRight: 40}} onPress={this.sendPost}>
-                  <Text style={{ margin: 5, color: 'white', paddingLeft: 3, paddingRight: 3, }}>انشر</Text>
-                </Button>
-            
-              
+            <CardItem
+              style={{ justifyContent: "center", alignItems: "center" }}
+            >
+              <Button
+                style={{
+                  backgroundColor: "#C53364",
+                  borderRadius: 30,
+                  padding: 4,
+                  paddingLeft: 40,
+                  paddingRight: 40
+                }}
+                onPress={this.sendPost}
+              >
+                <Text
+                  style={{
+                    margin: 5,
+                    color: "white",
+                    paddingLeft: 3,
+                    paddingRight: 3
+                  }}
+                >
+                  انشر
+                </Text>
+              </Button>
             </CardItem>
           </Card>
         </Content>
       </Container>
-      
     );
   }
 }

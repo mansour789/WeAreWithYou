@@ -71,14 +71,14 @@ const  Apppw = createBottomTabNavigator({
         )
       },
     },   
-    // AccountScreen: {
-    //   screen: AccountScreen,
-    //   navigationOptions: {
-    //     tabBarIcon: ({ focused, horizontal, tintColor }) => (
-    //       <Icon name="ios-options" size={30} style={{ color: 'gray'}} />
-    //     )
-    //   },
-    // },   
+    SignUp: {
+      screen: SignUp,
+      navigationOptions: {
+        tabBarIcon: ({ focused, horizontal, tintColor }) => (
+          <Icon name="ios-options" size={30} style={{ color: 'gray'}} />
+        )
+      },
+    },   
     AccountScreen: {
       screen: AccountScreen,
       navigationOptions: {

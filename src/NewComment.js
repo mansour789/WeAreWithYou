@@ -25,6 +25,8 @@ import {
   Body,
   Right
 } from "native-base";
+import axios from 'axios'
+import apiUrl from './ApiConfig'
 
 export default class NewComment extends Component {
   constructor(props) {
@@ -33,6 +35,41 @@ export default class NewComment extends Component {
         comment: ''
     };
   }
+
+  sendComment = () => {
+    const { navigation } = this.props;
+    const id = navigation.getParam("id")
+    
+    const config = {
+      headers: {'Authorization': `bearer ${this.props.screenProps.data}`}
+      
+    };
+    
+    if (this.state.comment) {
+      
+      axios.post(`${apiUrl}/posts/${id}/comments`,{
+        comment: {
+          content: this.state.comment
+          }
+      },config).then(res => {
+        if (res.status === 201){
+          
+          console.log(res)
+          alert("تم إرسال تعليقك بنجاح")
+          this.props.navigation.goBack();
+
+        }else{
+          alert(res.status)
+
+        }
+      }).catch(err=>{
+        alert(err)
+      })
+  
+    } else {
+      alert("لا يمكن إرسال محتوى فارغ");
+    }
+  };
   
 
   render() {
@@ -52,7 +89,7 @@ export default class NewComment extends Component {
                   <Text
                     style={{ fontSize: 20, fontWeight: "500", marginBottom: 4 }}
                   >
-                    User Here
+                    {this.props.screenProps.user.username}
                   </Text>
                 </Body>
               </Left>
@@ -74,7 +111,7 @@ export default class NewComment extends Component {
                   paddingLeft: 40,
                   paddingRight: 40
                 }}
-                onPress={() => alert(this.state.comment)}
+                onPress={this.sendComment}
               >
                 <Text
                   style={{

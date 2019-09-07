@@ -14,7 +14,7 @@ export class Catagories extends React.Component {
   }
   seePosts = ()=>{
 
-  this.props.navigation.navigate("Post", {name: this.props.name, id: this.props.id})
+  this.props.navigation.navigate("Post", {name: this.props.name, id: this.props.id, topics: this.props.topics})
   }
   
   render() {

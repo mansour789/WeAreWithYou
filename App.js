@@ -3,6 +3,9 @@ import { Text, View, Platform, Image, AsyncStorage } from "react-native";
 
 
 import Navigations from './src/Navigations'
+
+
+
 export default class App extends React.Component {
   state ={
     user: {},
@@ -10,6 +13,9 @@ export default class App extends React.Component {
   }
   componentDidMount(){
     this.getToken()
+  }
+  setUser = (user)=>{
+    this.setState({user})
   }
   async getToken() {
     try {
@@ -23,7 +29,7 @@ export default class App extends React.Component {
   render() {
     return (
       
-        <Navigations  screenProps={{data: this.state.token}}  />
+        <Navigations  screenProps={{data: this.state.token, setUser: this.setUser, user: this.state.user}}  />
    
      
       
