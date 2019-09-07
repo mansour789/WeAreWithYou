@@ -4,6 +4,7 @@ import { Container, Header, Content, Card, CardItem, Thumbnail, Button, Icon, Le
 import Comments from './Comments'
 import Moment from 'moment'
 import { CommentsData } from '../DummyData'
+import ButtonAdd from './ButtonAdd';
 
 
  class OnePost extends Component {
@@ -34,7 +35,7 @@ import { CommentsData } from '../DummyData'
                 <Thumbnail source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTggdND5xYxohjHJV_i8nO0EUplyrJHxDDxiHq6tboI184Oaezw'}} />
                 <Body>
                   <Text style={{fontSize: 20, fontWeight: "500", marginBottom: 4}}>{ownerName}</Text>
-                  
+                  <Text note >{Moment(createdAt).fromNow()}</Text>
                 </Body>
               </Left>
             </CardItem>
@@ -43,19 +44,16 @@ import { CommentsData } from '../DummyData'
             </CardItem>
             <CardItem>
               <Left>
-                <Button  transparent onPress={()=> alert("Click Like")}>
-                  <Text style={{margin: 5}}>{likes}</Text>
-                  <Icon active name="thumbs-up" />
-                </Button>
+                <ButtonAdd title={"تعليق"}/>
               </Left>
-              <Body>
-                <Button  transparent onPress={()=> this.setState({showComment: true})}>
-                  <Text style={{flex: 1}}>{this.state.commentLength ? this.state.commentLength : "0"} تعليقات</Text>
-                  <Icon active  name="chatbubbles" style={{flex: 1}} />
-                </Button>
-              </Body>
+              {/* <Body> */}
               <Right>
-                <Text>{Moment(createdAt).fromNow()}</Text>
+                <Button  transparent onPress={()=> this.setState({showComment: true})}>
+                  <Text style={{ marginRight: 2}}>{this.state.commentLength ? this.state.commentLength : "0"} تعليقات</Text>
+                  <Icon active  name="chatbubbles" style={{}} />
+                </Button>
+              {/* </Body> */}
+                {/* <Text></Text> */}
               </Right>
             </CardItem>
           </Card>

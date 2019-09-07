@@ -13,7 +13,7 @@ export class Catagories extends React.Component {
     }
   }
   seePosts = ()=>{
-    
+    // console.log(this.context)
     // this.context.getPosts(this.props.id);
   this.props.navigation.navigate("Post", {name: this.props.name})
   }

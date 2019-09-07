@@ -11,11 +11,13 @@ import {
   Body,
   Right,
   Button,
-  Title
+  Title,
+  Icon
 } from "native-base";
-import Icon from "react-native-vector-icons/Ionicons";
+// import Icon from "react-native-vector-icons/Ionicons";
 import DetelesPost from "./DetelesPost";
 import { PostsData } from "../DummyData";
+import ButtonAdd from './ButtonAdd'
 
 export class Post extends Component {
   state = {
@@ -35,22 +37,33 @@ export class Post extends Component {
             <View
               style={{
                 flex: 1,
+                flexDirection: "row",
                 backgroundColor: "white",
                 borderBottomWidth: 1,
                 borderBottomColor: "#dddddd"
               }}
             >
-              <Text
-                style={{
-                  fontSize: 30,
-                  fontWeight: "600",
-                  textAlign: "center",
-                  flex: 1,
-                  margin: 10
-                }}
-              >
-                {name}
-              </Text>
+               <Body>
+          <Text
+            style={{
+              fontSize: 30,
+              fontWeight: "600",
+              textAlign: "center",
+              flex: 1,
+              margin: 10
+            }}
+          >
+            {name}
+          </Text>
+        </Body>
+        <Right>
+              <ButtonAdd title={"حكاية"} />
+          
+          </Right>  
+         
+            
+             
+              
             </View>
 
             <List>
