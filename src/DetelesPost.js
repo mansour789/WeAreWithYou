@@ -11,11 +11,13 @@ export default class ListPost extends Component {
     });
   }
   render() {
+    console.log(this.props.ownerPhoto)
+    const photo = this.props.ownerPhoto
     return (
       
             <ListItem thumbnail>
               <Left>
-                <Thumbnail square source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTggdND5xYxohjHJV_i8nO0EUplyrJHxDDxiHq6tboI184Oaezw' }} />
+                <Thumbnail square source={require(`../assets/Default.png`)} />
               </Left>
               <Body>
                 <Text style={{fontSize: 20, fontWeight: "500", marginBottom: 4}}>{this.props.ownerName}</Text>

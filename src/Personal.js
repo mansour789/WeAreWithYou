@@ -16,14 +16,14 @@ export default class Personal extends Component {
           <View style={styles.header}>
             <View style={styles.headerContent}>
                 <Image style={styles.avatar}
-                  source={{uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'}}/>
+                  source={require('../assets/Default.png')}/>
 
                 <Text style={styles.name}>John Doe </Text>
                 
             </View>
           </View>
         <View style={styles.container}>
-          <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={() => alert('click add email')}>
+          <TouchableHighlight  style={[styles.buttonContainer, styles.loginButton]} onPress={() => alert('click add email')}>
           <Text style={styles.loginText}>اربط حسابك مع الايميل</Text>
         </TouchableHighlight>
         <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={() => alert('see post')}>

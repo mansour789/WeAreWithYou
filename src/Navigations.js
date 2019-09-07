@@ -8,7 +8,7 @@ import Post from './Post';
 import LoginView from './screens/tabs/LoginView';
 import SignUp from './screens/tabs/SignUp'
 import {Icon} from 'native-base'
-import AccountScreen from './screens/tabs/AccountScreen'
+import Personal from './Personal'
 import OnePost from './OnePost'
 import NewPost from './NewPost'
 import NewComment from './NewComment';
@@ -24,21 +24,15 @@ const homeStack = createStackNavigator({
     },
     Post: {  
       screen: Post, 
-      navigationOptions:{
-        title  : "",
-      }
+      
     },
-    AccountScreen: {  
-        screen: AccountScreen, 
-        navigationOptions:{
-          title  : "AccountScreen",
-        }
+    Personal: {  
+        screen: Personal, 
+        
       },
       OnePost: {  
         screen: OnePost, 
-        navigationOptions:{
-          
-        }
+        
       },
       NewPost: {  
           screen: NewPost, 
@@ -71,16 +65,16 @@ const  Apppw = createBottomTabNavigator({
         )
       },
     },   
-    SignUp: {
-      screen: SignUp,
-      navigationOptions: {
-        tabBarIcon: ({ focused, horizontal, tintColor }) => (
-          <Icon name="ios-options" size={30} style={{ color: 'gray'}} />
-        )
-      },
-    },   
-    AccountScreen: {
-      screen: AccountScreen,
+    // SignUp: {
+    //   screen: SignUp,
+    //   navigationOptions: {
+    //     tabBarIcon: ({ focused, horizontal, tintColor }) => (
+    //       <Icon name="ios-options" size={30} style={{ color: 'gray'}} />
+    //     )
+    //   },
+    // },   
+    Personal: {
+      screen: Personal,
       navigationOptions: {
         tabBarIcon: ({ focused, horizontal, tintColor }) => (
           <Icon name="ios-person" size={30} style={{ color: 'gray'}} />
@@ -93,7 +87,7 @@ const  Apppw = createBottomTabNavigator({
       navigationOptions: {
         showLabel: false,
         tabBarIcon: ({ tintColor }) => (
-          <Image source={require('../assets/logo.png')} style={{width: 45, height: 30}} />
+          <Image source={require('../assets/Default.png')} style={{width: 45, height: 30}} />
         )
         
       },
@@ -101,7 +95,7 @@ const  Apppw = createBottomTabNavigator({
     
   },    
   { 
-    initialRouteName : "LoginView", 
+    initialRouteName : "Home", 
     tabBarOptions: {
       activeTintColor: '#C53364',
       inactiveTintColor: 'gray',

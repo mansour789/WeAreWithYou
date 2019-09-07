@@ -14,6 +14,8 @@ import apiUrl from "../../ApiConfig";
 // import Navigations from "../../Navigations";
 
 const ACCESS_TOKEN = "access_token";
+const USERNAME = "username";
+const PHOTO = "photo"
 
 export default class LoginView extends Component {
   constructor(props) {
@@ -28,7 +30,7 @@ export default class LoginView extends Component {
 
   checkLogIn = () => {
     Keyboard.dismiss();
-    const { userName, password } = this.state;
+    const { userName, password } = this.state; 
     if (userName && password) {
       //make log in
       this.loginUser(userName, password);
@@ -52,7 +54,7 @@ export default class LoginView extends Component {
         // alert(`${res.data.user.username}, ${res.data.user.token}`)
         screenProps.setUser(res.data.user)
         
-        this.saveToken(res.data.user.token);
+        this.saveToken(res.data.user.token, res.data.user.username, res.data.user.photo);
         
       })
       .catch(err => {
@@ -61,14 +63,18 @@ export default class LoginView extends Component {
       });
   };
 
-  async saveToken(token) {
+  async saveToken(token, user, photo) {
     try {
       await AsyncStorage.setItem(ACCESS_TOKEN, token);
+      await AsyncStorage.setItem(USERNAME, user);
+      await AsyncStorage.setItem(PHOTO, photo);
+
       this.getToken();
     } catch (error) {
       console.log("somthing wrong" + error);
     }
   }
+  
   async getToken() {
     try {
      let token = await AsyncStorage.getItem(ACCESS_TOKEN);
@@ -78,6 +84,10 @@ export default class LoginView extends Component {
     }
   }
 
+  goRegister = ()=>{
+    
+    this.props.navigation.navigate("SignUp");
+  }
 
   render() {
     return (
@@ -118,14 +128,14 @@ export default class LoginView extends Component {
           style={[styles.buttonContainer, styles.loginButton]}
           onPress={() => this.checkLogIn()}
         >
-          <Text style={styles.loginText}>Login</Text>
+          <Text style={styles.loginText}>تسجيل الدخول</Text>
         </TouchableHighlight>
 
         <TouchableHighlight
           style={styles.buttonContainer}
-          onPress={() => alert("go to sign up")}
+          onPress={this.goRegister}
         >
-          <Text style={{ color: "white" }}>Register</Text>
+          <Text style={{ color: "white" }}>إنشاء حساب</Text>
         </TouchableHighlight>
         
       </View>

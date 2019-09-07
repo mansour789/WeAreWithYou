@@ -73,6 +73,7 @@ export default class NewComment extends Component {
   
 
   render() {
+    // const photo = this.props.screenProps.photo;
     return (
       <Container>
         <Content>
@@ -80,16 +81,13 @@ export default class NewComment extends Component {
             <CardItem>
               <Left>
                 <Thumbnail
-                  source={{
-                    uri:
-                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTggdND5xYxohjHJV_i8nO0EUplyrJHxDDxiHq6tboI184Oaezw"
-                  }}
+                  source={require(`../assets/Default.png`)}
                 />
                 <Body>
                   <Text
                     style={{ fontSize: 20, fontWeight: "500", marginBottom: 4 }}
                   >
-                    {this.props.screenProps.user.username}
+                    {this.props.screenProps.username}
                   </Text>
                 </Body>
               </Left>

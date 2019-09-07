@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import {
   StyleSheet,
   Text,
-  Picker,
-  TextInput,
+  KeyboardAvoidingView,
+  View,
   TouchableHighlight,
   Image,
   Alert
@@ -84,8 +84,10 @@ export default class NewPost extends Component {
   }
 
   render() {
-    console.log(this.props.screenProps.user)
+    console.log(this.props.screenProps.username)
     return (
+      
+      
       <Container>
         <Content>
           <Header style={{ backgroundColor: "#5F2464" }}>
@@ -97,16 +99,13 @@ export default class NewPost extends Component {
             <CardItem>
               <Left>
                 <Thumbnail
-                  source={{
-                    uri:
-                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTggdND5xYxohjHJV_i8nO0EUplyrJHxDDxiHq6tboI184Oaezw"
-                  }}
+                  source={require(`../assets/Default.png`)}
                 />
                 <Body>
                   <Text
                     style={{ fontSize: 20, fontWeight: "500", marginBottom: 4 }}
                   >
-                    {this.props.screenProps.user.username}
+                    {this.props.screenProps.username}
                   </Text>
                 </Body>
               </Left>
@@ -125,7 +124,7 @@ export default class NewPost extends Component {
               <Form>
                 <Textarea
                   onChangeText={post => this.setState({ post })}
-                  rowSpan={8}
+                  rowSpan={4}
                   placeholder="اكتب حكايتك هنا"
                 />
               </Form>
@@ -158,6 +157,7 @@ export default class NewPost extends Component {
           </Card>
         </Content>
       </Container>
+     
     );
   }
 }

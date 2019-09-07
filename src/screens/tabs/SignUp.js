@@ -24,6 +24,10 @@ export default class SignUp extends Component {
     // this.regiesterUser = this.regiesterUser.bind(this);
   }
 
+  goUignIn = ()=> {
+    this.props.navigation.navigate("LoginView");
+  }
+
    regiesterUser = (userName, password, passwordConfirmation) =>{
       
            axios.post(`${apiUrl}/sign-up`, {
@@ -124,7 +128,7 @@ export default class SignUp extends Component {
 
         <TouchableHighlight
           style={styles.buttonContainer}
-          onPress={() => alert("go to log in")}
+          onPress={this.goUignIn}
         >
           <Text style={{ color: "white" }}>لديك حساب ؟ تسجيل الدخول</Text>
         </TouchableHighlight>
