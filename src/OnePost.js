@@ -43,8 +43,15 @@ class OnePost extends Component {
         console.log(err);
       });
 
-    //  let allComments = CommentsData.comments;
-    //  this.setState({commentLength: allComments.length})
+      
+  }
+  addComment = () => {
+    if(this.props.screenProps.data){
+      
+      this.props.navigation.navigate("NewComment")
+    }else{
+      this.props.navigation.navigate("LoginView")
+    }
   }
   render() {
     const { navigation } = this.props;
@@ -82,7 +89,7 @@ class OnePost extends Component {
             </CardItem>
             <CardItem>
               <Left>
-                <ButtonAdd title={"تعليق"} />
+                <ButtonAdd title={"تعليق"} add={this.addComment}/>
               </Left>
               {/* <Body> */}
               <Right>

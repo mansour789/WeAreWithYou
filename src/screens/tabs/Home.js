@@ -14,12 +14,19 @@ import apiUrl from '../../ApiConfig'
 
 
 export class Home extends React.Component {
+constructor(props) {
+  super(props)
 
-  state={
+  this.state = {
     categoriesData: [],
     loading: true
   }
+}
+
   componentDidMount(){
+
+
+
       axios.get(`${apiUrl}/categories`)
       .then(res=>{
           console.log(res)
@@ -31,9 +38,11 @@ export class Home extends React.Component {
       .catch(error => {
         console.log(error)
       })
+      
   }
   
   render() {
+
     return (
      
       <SafeAreaView style={{ flex: 1 }}>
@@ -43,7 +52,7 @@ export class Home extends React.Component {
                     >
                 <View style={{ flex: 1, backgroundColor: 'white', paddingTop: 20 }}>
                     <Text style={{ fontSize: 24, fontWeight: '700', paddingHorizontal: 20, textAlign: 'center' }}>
-                          حنا معك
+                          حنا معك {this.props.screenProps.data}
                     </Text>
                 </View>
           

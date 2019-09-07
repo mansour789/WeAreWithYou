@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import {
   StyleSheet,
   Text,
-  View,
+  Picker,
   TextInput,
   TouchableHighlight,
   Image,
@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { categoriesData } from "../DummyData";
 import {
-  Picker,
+  
   Form,
   Textarea,
   Container,
@@ -25,27 +25,28 @@ import {
   Body,
   Right
 } from "native-base";
+import ChooseTopic from "./screens/tabs/AccountScreen";
 
 export default class NewPost extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: undefined,
+      selected: '',
       post: ''
     };
   }
-  onValueChange = value => {
+  topicID = value => {
     this.setState({
       selected: value
     });
   };
 
+  sendPost = () => {
+    alert(this.state.post)
+  }
+
   render() {
-    const piccker = categoriesData.categories.map(cat => {
-      return (
-        <Picker.Item key={cat.id} label={`${cat.name}`} value={`${cat.id}`} />
-      );
-    });
+    
 
     return (
       <Container>
@@ -73,7 +74,7 @@ export default class NewPost extends Component {
             </CardItem>
             {/* <CardItem><Text>{this.state.selected}</Text></CardItem> */}
             <CardItem transparent>
-              <Form>
+              {/* <Form>
                 <Picker
                   mode="dropdown"
                   placeholder="اختر مجموعة"
@@ -86,7 +87,9 @@ export default class NewPost extends Component {
                 >
                   {piccker}
                 </Picker>
-              </Form>
+              </Form> */}
+              <ChooseTopic topics={categoriesData.categories} topicID={this.topicID} selected={this.state.selected}/>
+              <Text>{this.state.selected}</Text>
             </CardItem>
             <CardItem transparent>
               <Form>
@@ -95,7 +98,7 @@ export default class NewPost extends Component {
             </CardItem>
             <CardItem style={{justifyContent: "center", alignItems: "center",}}>
              
-              <Button  style={{backgroundColor: "#C53364", borderRadius:30, padding: 4, paddingLeft: 40, paddingRight: 40}} onPress={() => alert(this.state.post)}>
+              <Button  style={{backgroundColor: "#C53364", borderRadius:30, padding: 4, paddingLeft: 40, paddingRight: 40}} onPress={this.sendPost}>
                   <Text style={{ margin: 5, color: 'white', paddingLeft: 3, paddingRight: 3, }}>انشر</Text>
                 </Button>
             

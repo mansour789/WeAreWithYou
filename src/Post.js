@@ -21,6 +21,7 @@ import axios from "axios";
 import apiUrl from "./ApiConfig";
 import ButtonAdd from "./ButtonAdd";
 
+
 export class Post extends Component {
   state = {
     loading: true,
@@ -42,6 +43,16 @@ export class Post extends Component {
       .catch(err => {
         console.log(err);
       });
+  }
+
+
+  addPost = () => {
+    if(this.props.screenProps.data){
+      
+      this.props.navigation.navigate("NewPost")
+    }else{
+      this.props.navigation.navigate("LoginView")
+    }
   }
   render() {
     const { navigation } = this.props;
@@ -73,7 +84,7 @@ export class Post extends Component {
                 </Text>
               </Body>
               <Right>
-                <ButtonAdd title={"حكاية"} />
+                <ButtonAdd title={"حكاية"} add={this.addPost} />
               </Right>
             </View>
 

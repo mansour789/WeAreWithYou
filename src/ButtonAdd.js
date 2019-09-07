@@ -27,7 +27,7 @@ export class ButtonAdd extends Component {
             bordered
             info
             style={{ marginRight: 10, paddingLeft: 10 }}
-            onPress={()=> alert("click add post")}
+            onPress={this.props.add}
           >
             <Text style={{ marginRight: 5 }}>اضف {this.props.title}</Text>
             <Icon name="add" />

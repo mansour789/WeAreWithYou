@@ -6,24 +6,26 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Home from './screens/tabs/Home';
 import Post from './Post';
 import LoginView from './screens/tabs/LoginView';
-import Personal from './Personal'
+import SignUp from './screens/tabs/SignUp'
 import {Icon} from 'native-base'
 import AccountScreen from './screens/tabs/AccountScreen'
 import OnePost from './OnePost'
+import NewPost from './NewPost'
+import NewComment from './NewComment';
 
 
 const homeStack = createStackNavigator({
     Home: { 
       screen: Home, 
       navigationOptions:{
-        title  : "Home",
+        title  : "العناوين الرئيسية",
        
       }
     },
     Post: {  
       screen: Post, 
       navigationOptions:{
-        title  : "Posts",
+        title  : "",
       }
     },
     AccountScreen: {  
@@ -35,9 +37,27 @@ const homeStack = createStackNavigator({
       OnePost: {  
         screen: OnePost, 
         navigationOptions:{
-          title  : "OnePost",
+          
         }
-      }
+      },
+      NewPost: {  
+          screen: NewPost, 
+          navigationOptions:{
+            title  : "حكاية جديدة",
+          }
+        },
+        LoginView: {  
+            screen: LoginView, 
+            navigationOptions:{
+              title  : "تسجيل الدخول",
+            }
+          },
+          NewComment: {  
+              screen: NewComment, 
+              navigationOptions:{
+                title  : "تعليق جديد",
+              }
+            }
   })
   
   
@@ -59,8 +79,8 @@ const  Apppw = createBottomTabNavigator({
     //     )
     //   },
     // },   
-    Personal: {
-      screen: Personal,
+    AccountScreen: {
+      screen: AccountScreen,
       navigationOptions: {
         tabBarIcon: ({ focused, horizontal, tintColor }) => (
           <Icon name="ios-person" size={30} style={{ color: 'gray'}} />
@@ -68,7 +88,7 @@ const  Apppw = createBottomTabNavigator({
         )
       },
     },
-    About: {
+    LoginView: {
       screen: LoginView,
       navigationOptions: {
         showLabel: false,
@@ -81,7 +101,7 @@ const  Apppw = createBottomTabNavigator({
     
   },    
   { 
-    initialRouteName : "Home", 
+    initialRouteName : "LoginView", 
     tabBarOptions: {
       activeTintColor: '#C53364',
       inactiveTintColor: 'gray',
