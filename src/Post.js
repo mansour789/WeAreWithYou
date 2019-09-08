@@ -68,7 +68,7 @@ export class Post extends Component {
               style={{
                 flex: 1,
                 flexDirection: "row",
-                backgroundColor: "white",
+                backgroundColor: "#5F2464",
                 borderBottomWidth: 1,
                 borderBottomColor: "#dddddd"
               }}
@@ -80,6 +80,7 @@ export class Post extends Component {
                     fontWeight: "600",
                     textAlign: "center",
                     flex: 1,
+                    color: "white",
                     margin: 10
                   }}
                 >
@@ -87,14 +88,14 @@ export class Post extends Component {
                 </Text>
               </Body>
               <Right>
-                <ButtonAdd title={"حكاية"} add={this.addPost} />
+                <ButtonAdd title={"حكاية"}  colorW={"white"} add={this.addPost} />
               </Right>
             </View>
 
             {!this.state.loading ? (
               <List>
                 {this.state.posts.length == 0 ? (
-                  <Text>No Posts</Text>
+                  <Text>لا توجد قصص في هذا الموضوع </Text>
                 ) : (
                   <FlatList
                     data={this.state.posts}

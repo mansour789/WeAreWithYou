@@ -25,12 +25,12 @@ export class ButtonAdd extends Component {
           <Button
             iconRight
             bordered
-            info
+            light
             style={{ marginRight: 10, paddingLeft: 10 }}
             onPress={this.props.add}
           >
-            <Text style={{ marginRight: 5 }}>اضف {this.props.title}</Text>
-            <Icon name="add" />
+            <Text style={{ marginRight: 5, color: this.props.colorW }}>اضف {this.props.title}</Text>
+            <Icon name="add" color={this.props.colorW}/>
           </Button>
         
     

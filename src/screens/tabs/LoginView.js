@@ -16,6 +16,7 @@ import apiUrl from "../../ApiConfig";
 const ACCESS_TOKEN = "access_token";
 const USERNAME = "username";
 const PHOTO = "photo"
+const ID = "user_id"
 
 export default class LoginView extends Component {
   constructor(props) {
@@ -54,7 +55,7 @@ export default class LoginView extends Component {
         // alert(`${res.data.user.username}, ${res.data.user.token}`)
         screenProps.setUser(res.data.user)
         
-        this.saveToken(res.data.user.token, res.data.user.username, res.data.user.photo);
+        this.saveToken(res.data.user.token, res.data.user.username, res.data.user.photo, res.data.user._id);
         
       })
       .catch(err => {
@@ -63,11 +64,12 @@ export default class LoginView extends Component {
       });
   };
 
-  async saveToken(token, user, photo) {
+  async saveToken(token, user, photo, id) {
     try {
       await AsyncStorage.setItem(ACCESS_TOKEN, token);
       await AsyncStorage.setItem(USERNAME, user);
       await AsyncStorage.setItem(PHOTO, photo);
+      await AsyncStorage.setItem(ID, id);
 
       this.getToken();
     } catch (error) {

@@ -12,9 +12,10 @@ export default class Personal extends Component {
 
 
   seeUserPost = () => {
-    alert("see user pst")
+    this.props.navigation.navigate("UserPost");
   }
   render() {
+    // console.log("DDDDDDDDDDD" + this.props.screenProps.data)
     return (
       <View style={{ flex: 1 }}>
         <View style={styles.header}>
@@ -24,7 +25,7 @@ export default class Personal extends Component {
               source={require("../assets/Default.png")}
             />
 
-            <Text style={styles.name}>John Doe </Text>
+            <Text style={styles.name}>{this.props.screenProps.username} </Text>
           </View>
         </View>
         <View style={styles.container}>

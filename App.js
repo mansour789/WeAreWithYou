@@ -8,7 +8,8 @@ export default class App extends React.Component {
     user: {},
     token: "",
     username: "",
-    photo: "Default"
+    photo: "Default",
+    id: ''
   };
   componentDidMount() {
     this.getToken();
@@ -21,16 +22,17 @@ export default class App extends React.Component {
       let token = await AsyncStorage.getItem("access_token");
       let username = await AsyncStorage.getItem("username");
       let photo = await AsyncStorage.getItem("photo");
-      this.setState({ token, username, photo });
+      let id = await AsyncStorage.getItem("user_id");
+      this.setState({ token, username, photo, id  });
     } catch (error) {
       alert(error);
     }
   }
-  componentDidUpdate = ()=>{
+  componentDidUpdate = ()=>{ 
     this.getToken();
   }
 
-  render() {
+  render() { 
     return (
       <Navigations
         screenProps={{
@@ -38,7 +40,8 @@ export default class App extends React.Component {
           setUser: this.setUser,
           user: this.state.user,
           username: this.state.username,
-          photo: this.state.photo
+          photo: this.state.photo,
+          id: this.state.id
         }}
       />
     );

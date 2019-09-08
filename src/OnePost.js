@@ -59,6 +59,7 @@ class OnePost extends Component {
     const { navigation } = this.props;
     const content = navigation.getParam("content");
     const ownerName = navigation.getParam("ownerName");
+    const title = navigation.getParam("title");
 
     const createdAt = navigation.getParam("createdAt");
     const likes = navigation.getParam("likes");

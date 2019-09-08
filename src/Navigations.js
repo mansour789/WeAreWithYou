@@ -12,6 +12,7 @@ import Personal from './Personal'
 import OnePost from './OnePost'
 import NewPost from './NewPost'
 import NewComment from './NewComment';
+import UserPost from './UserPost'
 
 
 const homeStack = createStackNavigator({
@@ -50,6 +51,12 @@ const homeStack = createStackNavigator({
               screen: NewComment, 
               navigationOptions:{
                 title  : "تعليق جديد",
+              }
+            },
+            UserPost: {
+              screen: UserPost,
+              navigationOptions:{
+                title: "مشاركاتك"
               }
             }
   })
@@ -95,7 +102,7 @@ const  Apppw = createBottomTabNavigator({
     
   },    
   { 
-    initialRouteName : "Home", 
+    initialRouteName : "Personal", 
     tabBarOptions: {
       activeTintColor: '#C53364',
       inactiveTintColor: 'gray',
