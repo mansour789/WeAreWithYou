@@ -11,7 +11,7 @@ export default class ListPost extends Component {
     });
   }
   render() {
-    console.log(this.props.ownerPhoto)
+    // console.log(this.props.ownerPhoto)
     const photo = this.props.ownerPhoto
     return (
       

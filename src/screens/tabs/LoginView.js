@@ -50,7 +50,7 @@ export default class LoginView extends Component {
         }
       })
       .then(res => {
-        console.log(res);
+        // console.log(res);
         // alert(`${res.data.user.username}, ${res.data.user.token}`)
         screenProps.setUser(res.data.user)
         

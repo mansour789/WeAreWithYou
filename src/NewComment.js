@@ -54,7 +54,7 @@ export default class NewComment extends Component {
       },config).then(res => {
         if (res.status === 201){
           
-          console.log(res)
+          // console.log(res)
           alert("تم إرسال تعليقك بنجاح")
           this.props.navigation.goBack();
 

@@ -27,6 +27,7 @@ import {
 import ChooseTopic from "./ChooseTopic";
 import axios from "axios";
 import apiUrl from './ApiConfig'
+import { Platform } from "@unimodules/core";
 
 
 export default class NewPost extends Component {
@@ -60,7 +61,7 @@ export default class NewPost extends Component {
       },config).then(res => { 
         if (res.status == 201){ 
           
-          console.log(res)
+          // console.log(res)
           alert("تم إرسال حكايتك بنجاح")
           this.props.navigation.goBack();
 
@@ -84,19 +85,19 @@ export default class NewPost extends Component {
   }
 
   render() {
-    console.log(this.props.screenProps.username)
+    // console.log(this.props.screenProps.username)
     return (
       
       
       <Container>
         <Content>
           <Header style={{ backgroundColor: "#5F2464" }}>
-            <Text style={{ color: "white", fontSize: 20, fontWeight: "500" }}>
-              حكاية جديدة
+            <Text style={styles.header}>
+            اختر موضوع
             </Text>
           </Header>
           <Card>
-            <CardItem>
+            {/* <CardItem>
               <Left>
                 <Thumbnail
                   source={require(`../assets/Default.png`)}
@@ -109,7 +110,7 @@ export default class NewPost extends Component {
                   </Text>
                 </Body>
               </Left>
-            </CardItem>
+            </CardItem> */}
             {/* <CardItem><Text>{this.state.selected}</Text></CardItem> */}
             <CardItem transparent>
               <ChooseTopic
@@ -121,6 +122,9 @@ export default class NewPost extends Component {
               {/* <Text>{this.state.topics[0]}</Text> */}
             </CardItem>
             <CardItem transparent>
+            {/* <KeyboardAvoidingView style={styles.container} behavior="padding" enabled> */}
+
+            
               <Form>
                 <Textarea
                   onChangeText={post => this.setState({ post })}
@@ -128,6 +132,7 @@ export default class NewPost extends Component {
                   placeholder="اكتب حكايتك هنا"
                 />
               </Form>
+              {/* </KeyboardAvoidingView> */}
             </CardItem>
             <CardItem
               style={{ justifyContent: "center", alignItems: "center" }}
@@ -166,8 +171,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#5F2464"
+    alignItems: "center"
+   
+  },
+  header: { 
+    color: "white", 
+    fontSize: 20, 
+    fontWeight: "500" ,
+    marginVertical: Platform.OS === "android" ? 17:0
   },
   inputContainer: {
     borderBottomColor: "#F5FCFF",

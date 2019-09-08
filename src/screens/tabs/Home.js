@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  FlatList, StyleSheet, SafeAreaView, ScrollView, Text
+  FlatList, StyleSheet, SafeAreaView, ScrollView, ImageBackground
 } from "react-native";
 import { Button, View } from "native-base";
 import Catagories from '../../Catagories'
@@ -29,7 +29,7 @@ constructor(props) {
 
       axios.get(`${apiUrl}/categories`)
       .then(res=>{
-          console.log(res)
+          // console.log(res)
           this.setState({
             categoriesData: res.data.categories,
             loading: false
@@ -47,13 +47,17 @@ constructor(props) {
      
       <SafeAreaView style={{ flex: 1 }}>
         <StartPage />
+       
+
+       
         <ScrollView
               scrollEventThrottle={16}
+              
                     >
                 <View style={{ flex: 1, backgroundColor: 'white', paddingTop: 20 }}>
-                    <Text style={{ fontSize: 24, fontWeight: '700', paddingHorizontal: 20, textAlign: 'center' }}>
+                    {/* <Text style={{ fontSize: 24, fontWeight: '700', paddingHorizontal: 20, textAlign: 'center' }}>
                           حنا معك {this.props.screenProps.data}
-                    </Text>
+                    </Text> */}
                 </View>
           
     
@@ -72,6 +76,7 @@ constructor(props) {
 
  </View>
  </ScrollView>
+ 
     </SafeAreaView>
     
               

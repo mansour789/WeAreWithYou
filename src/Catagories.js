@@ -1,6 +1,6 @@
 import React from "react";
-import { Text, ImageBackground } from "react-native";
-import { Button } from "native-base";
+import { Text,  View } from "react-native";
+import { Button,  } from "native-base";
 
 
 export class Catagories extends React.Component {
@@ -20,21 +20,23 @@ export class Catagories extends React.Component {
   render() {
     return (
       <>
-        <ImageBackground
+        {/* <ImageBackground
           style={styles.img}
           borderRadius={10}
-          source={require("../assets/dd.jpeg")}
-        >
+          source={require("../assets/Default.png")}
+        > */}
+        <View style={styles.img}>
           <Button
-            bordered
+            transparent
             onPress={this.seePosts}
-            info
+            
             style={styles.buttonImg}
           >
             <Text style={styles.title}> {this.props.name}</Text>
-            <Text>{this.props.id}</Text>
+            {/* <Text>{this.props.id}</Text> */}
           </Button>
-        </ImageBackground>
+          </View>
+        {/* </ImageBackground> */}
       </>
     );
   }
@@ -47,13 +49,13 @@ const styles = {
     width: 120,
     height: 120,
     margin: 20,
-
-    opacity: 0.7
+    backgroundColor: '#5F2464'
+    
   },
   title: {
     color: "white",
     fontWeight: "bold",
-    fontSize: 20
+    fontSize: 25
   },
   buttonImg: {
     flex: 1,

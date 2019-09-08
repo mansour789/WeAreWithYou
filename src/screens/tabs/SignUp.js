@@ -37,7 +37,7 @@ export default class SignUp extends Component {
               password_confirmation: passwordConfirmation
               }
           }).then(res => {
-            console.log(res)
+            // console.log(res)
             alert(`${res.data.user.username}, ${res.data.user.photo},`)
             // alert(`${userName}, ${password}, ${passwordConfirmation}`)
             this.setState({

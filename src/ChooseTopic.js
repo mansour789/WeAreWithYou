@@ -10,7 +10,7 @@ export default class ChooseTopic extends Component {
     });
     return (
       <View style={styles.container}>
-        <Text style={styles.textStyle}>اختر موضوع</Text>
+        
         <Picker
           style={styles.pickerStyle}
           selectedValue={this.props.selected}
@@ -28,15 +28,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center"
   },
-  textStyle: {
-    marginBottom: Platform.OS === "android" ? 4 : 24,
-    fontSize: 25,
-    fontWeight: "bold",
-    textAlign: "center",
-    color: "#C53364"
-  },
+  // textStyle: {
+  //   // marginBottom: Platform.OS === "android" ? 4 : 24,
+  //   fontSize: 25,
+  //   fontWeight: "bold",
+  //   textAlign: "center",
+  //   color: "#C53364"
+  // },
   pickerStyle: {
-    height: 110,
+    height: 50,
     width: "80%",
     color: "#5F2464",
     justifyContent: "center"
