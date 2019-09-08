@@ -71,7 +71,7 @@ export default class Personal extends Component {
       <Text style={styles.loginText}>اربط حسابك مع الايميل</Text>
     </TouchableHighlight>
     <TouchableHighlight
-      style={[styles.buttonContainer, styles.loginButton]} 
+      style={[styles.buttonContainer, styles.loginButton]}  
       onPress={this.seeUserPost}
     >
       <Text style={styles.loginText}>شاهد مشاركاتك</Text>

@@ -13,7 +13,7 @@ import OnePost from './OnePost'
 import NewPost from './NewPost'
 import NewComment from './NewComment';
 import UserPost from './UserPost'
-
+import EditPost from './EditPost'
 
 const homeStack = createStackNavigator({
     Home: { 
@@ -63,6 +63,12 @@ const homeStack = createStackNavigator({
               screen: SignUp,
               navigationOptions:{
                 title: "إنشاء حساب"
+              }
+            },
+            EditPost: {
+              screen: EditPost,
+              navigationOptions:{
+                title: "تعديل حكايتك"
               }
             }
   })

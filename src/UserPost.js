@@ -28,8 +28,7 @@ export class UserPost extends Component {
     posts: []
   };
 
-  componentDidMount() {
-    
+  getUserPost = () =>{
     const id = this.props.screenProps.id
     const config = {
         headers: {'Authorization': `bearer ${this.props.screenProps.data}`}
@@ -48,6 +47,10 @@ export class UserPost extends Component {
         console.log(err);
       });
   }
+  componentDidMount() {
+    this.getUserPost();
+   
+  }
 
   deletePost = (post_id) => {
     const config = {
@@ -60,11 +63,9 @@ export class UserPost extends Component {
     .then(res=> {
       if(res.status === 204){
         alert("تم حذف مشاركتك")
-        self.props.navigation.navigate("Personal");
-        
-        this.setState((prevState)=>{
-            posts : [...prevState.posts]
-        })
+        // self.props.navigation.navigate("Personal");
+          
+        this.getUserPost()
       }else{
         alert("خطأ في الاتصال حاول مجددا") 
       }
@@ -75,8 +76,9 @@ export class UserPost extends Component {
     // alert(post_id)
   }
 
-  editPost = () => {
-    alert("edit post")
+  editPost = (post) => {
+    // alert("Edit")
+    this.props.navigation.navigate("EditPost", {post, getUserPost: this.getUserPost})
   }
 
   render() {
@@ -134,6 +136,7 @@ export class UserPost extends Component {
                         navigation={this.props.navigation}
                         deletePost={this.deletePost}
                         editPost={this.editPost}
+                        wholePost={item}
                         isOwner={"YES"}
                       />
                     )}

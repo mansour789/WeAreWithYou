@@ -32,7 +32,7 @@ export default class ListPost extends Component {
                 <Button bordered  danger onPress={()=>this.props.deletePost(this.props.id)} style={{marginHorizontal: 6}}>
                   <Text style={{ paddingLeft:5, paddingRight: 5, marginHorizontal: 3}}>حذف </Text>
                 </Button>
-                <Button  bordered danger onPress={this.props.editPost} style={{marginHorizontal: 6}}>
+                <Button  bordered danger onPress={()=>this.props.editPost(this.props.wholePost)} style={{marginHorizontal: 6}}>
                   <Text style={{ paddingLeft:5, paddingRight: 5, marginHorizontal: 3}}>تعديل </Text>
                 </Button>
                 </> : null}
