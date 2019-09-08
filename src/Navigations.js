@@ -58,6 +58,12 @@ const homeStack = createStackNavigator({
               navigationOptions:{
                 title: "مشاركاتك"
               }
+            },
+            SignUp: {
+              screen: SignUp,
+              navigationOptions:{
+                title: "إنشاء حساب"
+              }
             }
   })
   

@@ -49,7 +49,35 @@ export class UserPost extends Component {
       });
   }
 
+  deletePost = (post_id) => {
+    const config = {
+      headers: {'Authorization': `bearer ${this.props.screenProps.data}`}
+      
+    };
+    const self = this;
+    // alert("delete Post")
+    axios.delete(`${apiUrl}/posts/${post_id}`, config) 
+    .then(res=> {
+      if(res.status === 204){
+        alert("تم حذف مشاركتك")
+        self.props.navigation.navigate("Personal");
+        
+        this.setState((prevState)=>{
+            posts : [...prevState.posts]
+        })
+      }else{
+        alert("خطأ في الاتصال حاول مجددا") 
+      }
+    }).catch(err=>{
+      console.log(err)
+      alert(err)
+    })
+    // alert(post_id)
+  }
 
+  editPost = () => {
+    alert("edit post")
+  }
 
   render() {
     // const { navigation } = this.props; 
@@ -96,14 +124,17 @@ export class UserPost extends Component {
                     data={this.state.posts}
                     keyExtractor={item => item._id}
                     renderItem={({ item }) => (
-                      <DetelesPost
-                        id={item.id}
+                      <DetelesPost 
+                        id={item._id}
                         createdAt={item.createdAt}
                         content={item.content}
                         likes={item.likes}
                         ownerName={this.props.screenProps.username}
                         ownerPhoto={this.props.screenProps.photo}
                         navigation={this.props.navigation}
+                        deletePost={this.deletePost}
+                        editPost={this.editPost}
+                        isOwner={"YES"}
                       />
                     )}
                   />

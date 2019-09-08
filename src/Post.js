@@ -50,8 +50,7 @@ export class Post extends Component {
     const {navigation}= this.props;
     const id = navigation.getParam("id")
     const topics = navigation.getParam("topics")
-    if(this.props.screenProps.data){
-      
+    if(this.props.screenProps.data !== ""){
       this.props.navigation.navigate("NewPost", {id, posts: this.state.posts, topics})
     }else{
       this.props.navigation.navigate("LoginView")

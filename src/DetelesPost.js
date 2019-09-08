@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, ImageBackground } from "react-native";
-import { Container, Header, Content, List, ListItem, Thumbnail,  Left, Body, Right, Button, Title } from 'native-base';
+import { Container, Header, Content, List, ListItem, Thumbnail,  Left, Body, Right, Button, Title, View } from 'native-base';
 export default class ListPost extends Component {
 
   seeUserPosts = () => {
@@ -24,9 +24,19 @@ export default class ListPost extends Component {
                 <Text note numberOfLines={3}>{this.props.content}  </Text>
               </Body>
               <Right>
-                <Button  bordered primary onPress={this.seeUserPosts}>
-                  <Text style={{color: "#0960FF", paddingLeft:5, paddingRight: 5, margin: 3}}>شاهد</Text>
+              <View style={{flexDirection: "row", justifyContent: "space-around", alignItems: "center"}}>
+                <Button  bordered primary onPress={this.seeUserPosts} style={{marginHorizontal: 6}}>
+                  <Text style={{color: "#0960FF", paddingLeft:5, paddingRight: 5}}>شاهد</Text>
                 </Button>
+                {this.props.isOwner === "YES" ?  <>
+                <Button bordered  danger onPress={()=>this.props.deletePost(this.props.id)} style={{marginHorizontal: 6}}>
+                  <Text style={{ paddingLeft:5, paddingRight: 5, marginHorizontal: 3}}>حذف </Text>
+                </Button>
+                <Button  bordered danger onPress={this.props.editPost} style={{marginHorizontal: 6}}>
+                  <Text style={{ paddingLeft:5, paddingRight: 5, marginHorizontal: 3}}>تعديل </Text>
+                </Button>
+                </> : null}
+                </View> 
               </Right>
             </ListItem>
           

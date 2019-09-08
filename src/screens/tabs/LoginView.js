@@ -41,7 +41,8 @@ export default class LoginView extends Component {
   };
 
   loginUser = (userName, password) => {
-    screenProps = this.props.screenProps;
+    const screenProps = this.props.screenProps;
+    const {navigation} = this.props;
     axios
       .post(`${apiUrl}/sign-in`, {
         credentials: {
@@ -51,12 +52,14 @@ export default class LoginView extends Component {
         }
       })
       .then(res => {
+        const userData = res.data.user
         // console.log(res);
         // alert(`${res.data.user.username}, ${res.data.user.token}`)
-        screenProps.setUser(res.data.user)
+        //token, username, photo, id
+        screenProps.setUser(userData.token, userData.username, userData.photo, userData._id)
         
-        this.saveToken(res.data.user.token, res.data.user.username, res.data.user.photo, res.data.user._id);
-        
+        this.saveToken(userData.token, userData.username, userData.photo, userData._id);
+        navigation.navigate("Home")
       })
       .catch(err => {
         console.log(err);
@@ -71,20 +74,20 @@ export default class LoginView extends Component {
       await AsyncStorage.setItem(PHOTO, photo);
       await AsyncStorage.setItem(ID, id);
 
-      this.getToken();
+      
     } catch (error) {
       console.log("somthing wrong" + error);
     }
   }
   
-  async getToken() {
-    try {
-     let token = await AsyncStorage.getItem(ACCESS_TOKEN);
-      alert(`Your TOKEN is ${token}`)
-    } catch (error) {
-      console.log("somthing wrong" + error);
-    }
-  }
+  // async getToken() {
+  //   try {
+  //    let token = await AsyncStorage.getItem(ACCESS_TOKEN);
+  //     alert(`Your TOKEN is ${token}`)
+  //   } catch (error) {
+  //     console.log("somthing wrong" + error);
+  //   }
+  // }
 
   goRegister = ()=>{
     

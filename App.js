@@ -5,32 +5,35 @@ import Navigations from "./src/Navigations";
 
 export default class App extends React.Component {
   state = {
-    user: {},
+    
     token: "",
     username: "",
-    photo: "Default",
+    photo: "",
     id: ''
   };
   componentDidMount() {
     this.getToken();
   }
-  setUser = user => {
-    this.setState({ user });
+  setUser = (token, username, photo, id) => {
+    console.log("this is SET user")
+    this.setState({ token, username, photo, id }); 
   };
   async getToken() {
+    console.log("this. is get token")
     try {
       let token = await AsyncStorage.getItem("access_token");
       let username = await AsyncStorage.getItem("username");
       let photo = await AsyncStorage.getItem("photo");
       let id = await AsyncStorage.getItem("user_id");
-      this.setState({ token, username, photo, id  });
+      console.log(token)
+      this.setState({ token, username, photo, id  }); 
     } catch (error) {
       alert(error);
     }
   }
-  componentDidUpdate = ()=>{ 
-    this.getToken();
-  }
+  // componentDidUpdate = ()=>{ 
+  //   this.getToken();
+  // }
 
   render() { 
     return (
@@ -38,7 +41,7 @@ export default class App extends React.Component {
         screenProps={{
           data: this.state.token,
           setUser: this.setUser,
-          user: this.state.user,
+          
           username: this.state.username,
           photo: this.state.photo,
           id: this.state.id
