@@ -4,16 +4,17 @@ import { createStackNavigator } from 'react-navigation-stack';
 import {  createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Home from './screens/tabs/Home';
-import Post from './Post';
-import LoginView from './screens/tabs/LoginView';
-import SignUp from './screens/tabs/SignUp'
+import Post from './screens/Posts/Post';
+import LoginView from './screens/Auth/LoginView';
+import SignUp from './screens/Auth/SignUp'
 import {Icon} from 'native-base'
-import Personal from './Personal'
-import OnePost from './OnePost'
-import NewPost from './NewPost'
-import NewComment from './NewComment';
-import UserPost from './UserPost'
-import EditPost from './EditPost'
+import Personal from './screens/tabs/Personal'
+import OnePost from './screens/Posts/OnePost'
+import NewPost from './screens/Posts/NewPost'
+import NewComment from './screens/comments/NewComment';
+import UserPost from './screens/Posts/UserPost'
+import EditPost from './screens/Posts/EditPost'
+import Aboutus from './screens/tabs/Aboutus';
 
 const homeStack = createStackNavigator({
     Home: { 
@@ -92,8 +93,8 @@ const  Apppw = createBottomTabNavigator({
     //     )
     //   },
     // },   
-    Personal: {
-      screen: Personal,
+    LoginView: {
+      screen: LoginView,
       navigationOptions: {
         tabBarIcon: ({ focused, horizontal, tintColor }) => (
           <Icon name="ios-person" size={30} style={{ color: 'gray'}} />
@@ -101,8 +102,8 @@ const  Apppw = createBottomTabNavigator({
         )
       },
     },
-    LoginView: {
-      screen: LoginView,
+    Personal: {
+      screen: Personal,
       navigationOptions: {
         showLabel: false,
         tabBarIcon: ({ tintColor }) => (

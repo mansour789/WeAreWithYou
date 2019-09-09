@@ -9,6 +9,7 @@ import {
   Button,
   View
 } from "native-base";
+import { TouchableOpacity } from "react-native-gesture-handler";
 export default class ListPost extends Component {
   seeUserPosts = () => {
     const { content, ownerName, id, createdAt, likes, ownerPhoto } = this.props;
@@ -28,8 +29,9 @@ export default class ListPost extends Component {
     return (
       <ListItem thumbnail>
         <Left>
-          <Thumbnail square source={require(`../assets/Default.png`)} />
+          <Thumbnail square source={require(`../../../assets/Default.png`)} />
         </Left>
+        {/* <TouchableOpacity onPress={this.seeUserPosts} style={{flex: 1}}> */}
         <Body style={{ marginHorizontal: 10 }}>
           <Text style={{ fontSize: 20, fontWeight: "500", marginBottom: 4 }}>
             {this.props.ownerName}
@@ -38,6 +40,7 @@ export default class ListPost extends Component {
             {this.props.content}{" "}
           </Text>
         </Body>
+          {/* </TouchableOpacity> */}
         <Right>
           <View
             style={{
@@ -45,16 +48,16 @@ export default class ListPost extends Component {
               justifyContent: "space-around",
               alignItems: "center"
             }}
-          >
+            >
             <Button
               bordered
               primary
               onPress={this.seeUserPosts}
               style={{ marginHorizontal: 6 }}
-            >
+              >
               <Text
                 style={{ color: "#0960FF", paddingLeft: 5, paddingRight: 5 }}
-              >
+                >
                 شاهد
               </Text>
             </Button>

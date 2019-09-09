@@ -19,7 +19,7 @@ class OneComment extends Component {
       <Card>
         <CardItem>
           <Left>
-            <Thumbnail source={require("../assets/Default.png")} />
+            <Thumbnail source={require("../../../assets/Default.png")} />
             <Body>
               <Text>{ownerName}</Text>
             </Body>

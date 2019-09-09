@@ -36,7 +36,7 @@ const styles = {
     width: 120,
     height: 120,
     margin: 20,
-    backgroundColor: "#5F2464",
+    backgroundColor: "#C53364", 
     borderRadius: 10,
     shadowColor: "black",
     shadowOffset: { width: 2, height: 5 },

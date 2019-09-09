@@ -13,12 +13,12 @@ import {
   Body,
   Right
 } from "native-base";
-import Comments from "./Comments";
+import Comments from "../comments/Comments";
 import Moment from "moment";
-import ButtonAdd from "./ButtonAdd";
+import ButtonAdd from "../components/ButtonAdd";
 import axios from "axios";
-import apiUrl from "./ApiConfig";
-import SpinnerLoading from "./SpinnerLoading";
+import apiUrl from "../../ApiConfig";
+import SpinnerLoading from "../components/SpinnerLoading";
 
 class OnePost extends Component {
   state = {
@@ -77,7 +77,7 @@ class OnePost extends Component {
             <CardItem>
               <Left>
                 <Thumbnail
-                  source={require(`../assets/Default.png`)}
+                  source={require(`../../../assets/Default.png`)}
                 />
                 <Body>
                   <Text
@@ -96,7 +96,9 @@ class OnePost extends Component {
               <Left>
                 <ButtonAdd title={"تعليق"} add={this.addComment}/>
               </Left>
-            
+            <Body>
+              <Text>Like</Text>
+            </Body>
               <Right>
                 <Button
                   transparent

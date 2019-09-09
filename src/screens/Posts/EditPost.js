@@ -13,7 +13,7 @@ import {
 } from "native-base";
 
 import axios from "axios";
-import apiUrl from "./ApiConfig";
+import apiUrl from "../../ApiConfig";
 // import { Platform } from "@unimodules/core";
 
 export default class EditPost extends Component {

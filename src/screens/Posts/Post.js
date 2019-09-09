@@ -5,9 +5,9 @@ import { Container, Content, List, Body, Right } from "native-base";
 import DetelesPost from "./DetelesPost";
 
 import axios from "axios";
-import apiUrl from "./ApiConfig";
-import ButtonAdd from "./ButtonAdd";
-import SpinnerLoading from "./SpinnerLoading";
+import apiUrl from "../../ApiConfig";
+import ButtonAdd from "../components/ButtonAdd";
+import SpinnerLoading from "../components/SpinnerLoading";
 
 export class Post extends Component {
   state = {
@@ -18,9 +18,9 @@ export class Post extends Component {
   componentDidMount() {
     this.getAppPost();
   } 
-  componentDidUpdate() {
-    this.getAppPost();
-  }
+  // componentDidUpdate() {
+  //   this.getAppPost();
+  // }
   getAppPost = () => {
     const { navigation } = this.props;
     const id = navigation.getParam("id");

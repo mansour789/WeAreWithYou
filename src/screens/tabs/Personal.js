@@ -8,7 +8,7 @@ import {
   AsyncStorage
 } from "react-native";
 import axios from "axios";
-import apiUrl from "./ApiConfig";
+import apiUrl from "../../ApiConfig";
 
 export default class Personal extends Component {
   seeUserPost = () => {
@@ -105,7 +105,7 @@ export default class Personal extends Component {
           <View style={styles.headerContent}>
             <Image
               style={styles.avatar}
-              source={require("../assets/Default.png")}
+              source={require("../../../assets/Default.png")}
             />
 
             <Text style={styles.name}>{this.props.screenProps.username} </Text>

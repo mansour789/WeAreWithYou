@@ -1,10 +1,10 @@
 import React from "react";
 import { FlatList, StyleSheet, SafeAreaView, ScrollView } from "react-native";
 import { View } from "native-base";
-import Catagories from "../../Catagories";
-import StartPage from "../../StartPage";
+import Catagories from "../Main/Catagories";
+import StartPage from "../Main/StartPage";
 import axios from "axios";
-import SpinnerLoading from "../../SpinnerLoading";
+import SpinnerLoading from "../components/SpinnerLoading";
 import apiUrl from "../../ApiConfig";
 
 export class Home extends React.Component {

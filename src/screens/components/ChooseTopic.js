@@ -29,8 +29,8 @@ const styles = StyleSheet.create({
   },
 
   pickerStyle: {
-    height: 50,
-    width: "80%",
+    height: 80,
+    width: "80%", 
     color: "#5F2464",
     justifyContent: "center"
   }

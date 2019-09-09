@@ -8,7 +8,7 @@ import {Image} from 'react-native'
             <Container>
            
             <Content>
-                <Image source={require('../assets/Default.png')}/>
+                <Image source={require('../../../assets/Default.png')}/>
               <Spinner color={'#C53364'} />
               
             </Content>

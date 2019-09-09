@@ -4,8 +4,8 @@ import { Container, Content, List, Body } from "native-base";
 
 import DetelesPost from "./DetelesPost";
 import axios from "axios";
-import apiUrl from "./ApiConfig";
-import SpinnerLoading from "./SpinnerLoading";
+import apiUrl from "../../ApiConfig";
+import SpinnerLoading from "../components/SpinnerLoading";
 
 export class UserPost extends Component {
   state = {
@@ -98,7 +98,7 @@ export class UserPost extends Component {
             {!this.state.loading ? (
               <List>
                 {this.state.posts.length == 0 ? (
-                  <Text>No Posts</Text>
+                  <Text style={{fontSize: 18, textAlign: "center", marginVertical: 20}}>ليس لديك قصة حتى الآن</Text>
                 ) : (
                   <FlatList
                     data={this.state.posts}

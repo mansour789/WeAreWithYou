@@ -1,56 +1,52 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, KeyboardAvoidingView, Platform } from "react-native";
+import { Text } from "react-native";
+
 import {
   Form,
   Textarea,
   Container,
-  Header,
   Content,
   Card,
   CardItem,
-  Button
+  Thumbnail,
+  Button,
+  Left,
+  Body
 } from "native-base";
-import ChooseTopic from "./ChooseTopic";
 import axios from "axios";
-import apiUrl from "./ApiConfig";
-// import { Platform } from "@unimodules/core";
+import apiUrl from "../../ApiConfig";
 
-export default class NewPost extends Component {
+export default class NewComment extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: "",
-      post: "",
-      topics: []
+      comment: ""
     };
   }
-  topicID = value => {
-    this.setState({
-      selected: value
-    });
-  };
 
-  sendPost = () => {
+  sendComment = () => {
+    const { navigation } = this.props;
+    const id = navigation.getParam("id");
+
     const config = {
       headers: { Authorization: `bearer ${this.props.screenProps.data}` }
     };
 
-    if (this.state.post) {
+    if (this.state.comment) {
       axios
         .post(
-          `${apiUrl}/categories/${this.state.selected}/posts`,
+          `${apiUrl}/posts/${id}/comments`,
           {
-            post: {
-              content: this.state.post
+            comment: {
+              content: this.state.comment
             }
           },
           config
         )
         .then(res => {
-          if (res.status == 201) {
+          if (res.status === 201) {
             // console.log(res)
-            alert("تم إرسال حكايتك بنجاح");
-
+            alert("تم إرسال تعليقك بنجاح");
             this.props.navigation.goBack();
           } else {
             alert(res.status);
@@ -63,35 +59,32 @@ export default class NewPost extends Component {
       alert("لا يمكن إرسال محتوى فارغ");
     }
   };
-  componentDidMount() {
-    const { navigation } = this.props;
-    const id = navigation.getParam("id");
-    const topics = navigation.getParam("topics");
-    this.setState({ selected: id, topics });
-  }
 
   render() {
-    // console.log(this.props.screenProps.username)
+    // const photo = this.props.screenProps.photo;
     return (
       <Container>
         <Content>
-          <Header style={{ backgroundColor: "#5F2464" }}>
-            <Text style={styles.header}>اختر موضوع</Text>
-          </Header>
           <Card>
-            <CardItem transparent>
-              <ChooseTopic
-                topics={this.state.topics}
-                topicID={this.topicID}
-                selected={this.state.selected}
-              />
+            <CardItem>
+              <Left>
+                <Thumbnail source={require(`../../../assets/Default.png`)} />
+                <Body>
+                  <Text
+                    style={{ fontSize: 20, fontWeight: "500", marginBottom: 4 }}
+                  >
+                    {this.props.screenProps.username}
+                  </Text>
+                </Body>
+              </Left>
             </CardItem>
+            <CardItem transparent></CardItem>
             <CardItem transparent>
               <Form>
                 <Textarea
-                  onChangeText={post => this.setState({ post })}
-                  rowSpan={4}
-                  placeholder="اكتب حكايتك هنا"
+                  onChangeText={comment => this.setState({ comment })}
+                  rowSpan={2}
+                  placeholder="اكتب تعليقك هنا"
                 />
               </Form>
             </CardItem>
@@ -106,7 +99,7 @@ export default class NewPost extends Component {
                   paddingLeft: 40,
                   paddingRight: 40
                 }}
-                onPress={this.sendPost}
+                onPress={this.sendComment}
               >
                 <Text
                   style={{
@@ -126,13 +119,3 @@ export default class NewPost extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  
-  header: {
-    color: "white",
-    fontSize: 20,
-    fontWeight: "500",
-    marginVertical: Platform.OS === "android" ? 17 : 0
-  }
-});
