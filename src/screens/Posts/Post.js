@@ -3,9 +3,7 @@ import { Text, View, FlatList } from "react-native";
 import { Container, Content, List, Body, Right } from "native-base";
 
 import PostDetails from "./PostDetails";
-
-import axios from "axios";
-import apiUrl from "../../ApiConfig";
+import { getAppPost } from "../../ApiConfig";
 import ButtonAdd from "../components/ButtonAdd";
 import SpinnerLoading from "../components/SpinnerLoading";
 
@@ -25,8 +23,7 @@ export class Post extends Component {
     const { navigation } = this.props;
     const id = navigation.getParam("id");
     //make axios requset
-    axios
-      .get(`${apiUrl}/categories/${id}/posts`)
+    getAppPost(id)
       .then(res => {
         this.setState({
           posts: res.data.posts,

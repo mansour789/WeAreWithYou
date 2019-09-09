@@ -115,7 +115,7 @@ const  Apppw = createBottomTabNavigator({
     
   },    
   { 
-    initialRouteName : "Home", 
+    initialRouteName : "Aboutus", 
     tabBarOptions: {
       activeTintColor: '#C53364',
       inactiveTintColor: 'gray',

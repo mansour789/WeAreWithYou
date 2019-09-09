@@ -11,8 +11,7 @@ import {
   Button
 } from "native-base";
 import ChooseTopic from "../components/ChooseTopic";
-import axios from "axios"; 
-import apiUrl from "../../ApiConfig";
+import { sendPost } from "../../ApiConfig";
 // import { Platform } from "@unimodules/core";
 
 export default class NewPost extends Component {
@@ -31,21 +30,14 @@ export default class NewPost extends Component {
   };
 
   sendPost = () => {
-    const config = {
-      headers: { Authorization: `bearer ${this.props.screenProps.data}` }
-    };
+    const token = this.props.screenProps.data
+    const selected = this.state.selected
+    const data = this.state.post
+    
 
     if (this.state.post) {
-      axios
-        .post(
-          `${apiUrl}/categories/${this.state.selected}/posts`,
-          {
-            post: {
-              content: this.state.post
-            }
-          },
-          config
-        )
+      sendPost(token, selected, data)
+      
         .then(res => {
           if (res.status == 201) {
             // console.log(res)

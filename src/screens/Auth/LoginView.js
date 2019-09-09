@@ -9,8 +9,7 @@ import {
   Image,
   AsyncStorage
 } from "react-native";
-import axios from "axios";
-import apiUrl from "../../ApiConfig";
+import { loginUser } from "../../ApiConfig";
 
 const ACCESS_TOKEN = "access_token";
 const USERNAME = "username";
@@ -42,13 +41,7 @@ export default class LoginView extends Component {
   loginUser = (userName, password) => {
     const screenProps = this.props.screenProps;
     const { navigation } = this.props;
-    axios
-      .post(`${apiUrl}/sign-in`, {
-        credentials: {
-          username: userName,
-          password: password
-        }
-      })
+    loginUser(userName, password)
       .then(res => {
         const userData = res.data.user;
         // console.log(res);
@@ -59,13 +52,13 @@ export default class LoginView extends Component {
           userData.photo,
           userData._id
         );
-
         this.saveToken(
           userData.token,
           userData.username,
           userData.photo,
           userData._id
         );
+        
         navigation.navigate("Home");
       })
       .catch(err => {

@@ -13,8 +13,7 @@ import {
   Left,
   Body
 } from "native-base";
-import axios from "axios";
-import apiUrl from "../../ApiConfig";
+import { sendComment } from "../../ApiConfig";
 
 export default class NewComment extends Component {
   constructor(props) {
@@ -27,32 +26,21 @@ export default class NewComment extends Component {
   sendComment = () => {
     const { navigation } = this.props;
     const id = navigation.getParam("id");
-
-    const config = {
-      headers: { Authorization: `bearer ${this.props.screenProps.data}` }
-    };
+    const data = this.state.comment
+    const token = this.props.screenProps.data
 
     if (this.state.comment) {
-      axios
-        .post(
-          `${apiUrl}/posts/${id}/comments`,
-          {
-            comment: {
-              content: this.state.comment
-            }
-          },
-          config
-        )
+      sendComment(token, id, data)
         .then(res => {
           if (res.status === 201) {
             // console.log(res)
             alert("تم إرسال تعليقك بنجاح");
             this.props.navigation.goBack();
           } else {
-            alert(res.status);
+            alert(res.status);  
           }
         })
-        .catch(err => {
+        .catch(err => { 
           alert(err);
         });
     } else {

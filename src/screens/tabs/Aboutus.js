@@ -10,12 +10,13 @@ export default class Aboutus extends Component {
             style={styles.avatar}
             source={require("../../../assets/fullLogo.png")}
           />
-        </View>
+        
 
-       <View>
+       
 
           <Text style={styles.name}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere
+          {/* <Text> */}
+            TEST ipsum dolor sit amet consectetur adipisicing elit. Facere
             dolor eos amet expedita voluptatem consequuntur non soluta, error,
             impedit rerum quibusdam unde incidunt! Autem modi sequi temporibus,
             ducimus quis reiciendis?
@@ -54,6 +55,7 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 22,
     color: "#FFF",
-    fontWeight: "600"
+    fontWeight: "600",
+    marginTop: 30
   }
 });

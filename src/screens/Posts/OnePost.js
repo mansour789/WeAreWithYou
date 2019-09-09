@@ -16,13 +16,12 @@ import {
 import Comments from "../comments/Comments";
 import Moment from "moment";
 import ButtonAdd from "../components/ButtonAdd";
-import axios from "axios";
-import apiUrl from "../../ApiConfig";
+import { getAllComments } from "../../ApiConfig"; 
 import SpinnerLoading from "../components/SpinnerLoading";
 
 class OnePost extends Component {
   state = {
-    showComment: false,
+    showComment: true,
     comments: [],
     loading: true
   };
@@ -36,8 +35,8 @@ class OnePost extends Component {
   getAllComments = () => {
     const { navigation } = this.props;
     const id = navigation.getParam("id");
-    axios
-      .get(`${apiUrl}/posts/${id}/comments`)
+    getAllComments(id)
+    
       .then(res => {
         this.setState({
           comments: res.data.comments,
@@ -100,16 +99,16 @@ class OnePost extends Component {
               <Text>Like</Text>
             </Body>
               <Right>
-                <Button
+                {/* <Button
                   transparent
                   onPress={() => this.setState({ showComment: true })} 
-                >
+                > */}
                   <Text style={{ marginRight: 2 }}>
                     {this.state.comments ? this.state.comments.length : "0"}{" "}
                     تعليقات
                   </Text>
                   <Icon active name="chatbubbles" style={{}} />
-                </Button>
+                {/* </Button> */}
                
               </Right>
             </CardItem>

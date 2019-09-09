@@ -11,9 +11,7 @@ import {
   CardItem,
   Button
 } from "native-base";
-
-import axios from "axios";
-import apiUrl from "../../ApiConfig";
+import { editPost } from "../../ApiConfig";
 // import { Platform } from "@unimodules/core";
 
 export default class EditPost extends Component {
@@ -28,21 +26,12 @@ export default class EditPost extends Component {
     const { navigation } = this.props;
     const getUserPost = navigation.getParam("getUserPost");
     const self = this;
-    const config = {
-      headers: { Authorization: `bearer ${this.props.screenProps.data}` }
-    };
-
+    const token = this.props.screenProps.data
+    const postId = this.state.post._id
+    const data = this.state.post.content
     if (this.state.post.content) {
-      axios
-        .patch(
-          `${apiUrl}/posts/${this.state.post._id}`,
-          {
-            post: {
-              content: this.state.post.content
-            }
-          },
-          config
-        )
+      editPost(token, postId, data)
+      
         .then(res => {
           if (res.status === 204) {
             alert("تم تعديل حكايتك");

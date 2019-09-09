@@ -7,8 +7,7 @@ import {
   TouchableHighlight,
   AsyncStorage
 } from "react-native";
-import axios from "axios";
-import apiUrl from "../../ApiConfig";
+import { signOut } from "../../ApiConfig";
 
 export default class Personal extends Component {
   seeUserPost = () => {
@@ -17,23 +16,18 @@ export default class Personal extends Component {
 
   signOut = () => {
     const screenProps = this.props.screenProps;
-    const config = {
-      headers: { Authorization: `bearer ${this.props.screenProps.data}` }
-    };
-    axios
-      .delete(`${apiUrl}/sign-out`, config)
-      .then(res => {
-        if (res.status === 204) {
-          screenProps.setUser("", "", "", "");
-          this.rmoveToken();
-          alert("تم تسجيل الخروج ");
-        } else {
-          alert("خطأ في الاتصال حاول مجددا");
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    signOut(screenProps.data).then(res =>{
+
+      if (res.status === 204) {
+        screenProps.setUser("", "", "", "");
+        this.rmoveToken();
+        alert("تم تسجيل الخروج ");
+      } else {
+        alert("خطأ في الاتصال حاول مجددا");
+      }
+    }).catch(err => {
+      console.log(err)
+    })
   };
 
   async rmoveToken() {

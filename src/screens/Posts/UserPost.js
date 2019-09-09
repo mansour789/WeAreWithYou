@@ -3,8 +3,7 @@ import { Text, View, FlatList } from "react-native";
 import { Container, Content, List, Body } from "native-base";
 
 import PostDetails from "./PostDetails";
-import axios from "axios";
-import apiUrl from "../../ApiConfig";
+import { deletePost, getUserPost } from "../../ApiConfig";
 import SpinnerLoading from "../components/SpinnerLoading";
 
 export class UserPost extends Component {
@@ -14,13 +13,13 @@ export class UserPost extends Component {
   };
 
   getUserPost = () => {
+    const token = this.props.screenProps.data
     const id = this.props.screenProps.id;
-    const config = {
-      headers: { Authorization: `bearer ${this.props.screenProps.data}` }
-    };
+    
     //make axios requset
-    axios
-      .get(`${apiUrl}/users/${id}/posts`, config)
+    getUserPost(token, id)
+
+    
       .then(res => {
         this.setState({
           posts: res.data.posts,
@@ -36,12 +35,10 @@ export class UserPost extends Component {
   }
 
   deletePost = post_id => {
-    const config = {
-      headers: { Authorization: `bearer ${this.props.screenProps.data}` }
-    };
-
-    axios
-      .delete(`${apiUrl}/posts/${post_id}`, config)
+    const token = this.props.screenProps.data
+    
+    deletePost(token,post_id)
+    
       .then(res => {
         if (res.status === 204) {
           alert("تم حذف مشاركتك");

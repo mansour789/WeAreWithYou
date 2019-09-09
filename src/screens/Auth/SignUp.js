@@ -8,8 +8,12 @@ import {
   Image,
   AsyncStorage
 } from "react-native";
-import axios from "axios";
-import apiUrl from "../../ApiConfig";
+import { regiesterUser } from "../../ApiConfig";
+
+const ACCESS_TOKEN = "access_token";
+const USERNAME = "username";
+const PHOTO = "photo";
+const ID = "user_id"; 
 
 export default class SignUp extends Component {
   constructor(props) {
@@ -29,17 +33,10 @@ export default class SignUp extends Component {
   regiesterUser = (userName, password, passwordConfirmation) => {
     const { navigation } = this.props;
     const screenProps = this.props.screenProps;
-    axios
-      .post(`${apiUrl}/sign-up`, {
-        credentials: {
-          username: userName,
-          password: password,
-          password_confirmation: passwordConfirmation
-        }
-      })
+    regiesterUser(userName, password, passwordConfirmation)
       .then(res => {
-        const userData = res.data.user;
         // console.log(res);
+        const userData = res.data.user;
 
         screenProps.setUser(
           userData.token,

@@ -3,9 +3,8 @@ import { FlatList, StyleSheet, SafeAreaView, ScrollView } from "react-native";
 import { View } from "native-base";
 import Catagories from "../Main/Catagories";
 import StartPage from "../Main/StartPage";
-import axios from "axios";
 import SpinnerLoading from "../components/SpinnerLoading";
-import apiUrl from "../../ApiConfig";
+import { getCatagories } from "../../ApiConfig";
 
 export class Home extends React.Component {
   constructor(props) {
@@ -18,18 +17,15 @@ export class Home extends React.Component {
   }
 
   componentDidMount() {
-    axios
-      .get(`${apiUrl}/categories`)
-      .then(res => {
-        // console.log(res)
-        this.setState({
-          categoriesData: res.data.categories,
-          loading: false
-        });
-      })
-      .catch(error => {
-        console.log(error);
+    getCatagories().then(res => {
+      // console.log(res)
+      this.setState({
+        categoriesData: res.data.categories,
+        loading: false
       });
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
   render() {
@@ -42,7 +38,7 @@ export class Home extends React.Component {
             {this.state.loading ? (
               <SpinnerLoading />
             ) : (
-              <FlatList 
+              <FlatList
                 numColumns={2}
                 data={this.state.categoriesData}
                 keyExtractor={item => item.id}
