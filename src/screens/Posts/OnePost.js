@@ -102,7 +102,7 @@ class OnePost extends Component {
               <Right>
                 <Button
                   transparent
-                  onPress={() => this.setState({ showComment: true })}
+                  onPress={() => this.setState({ showComment: true })} 
                 >
                   <Text style={{ marginRight: 2 }}>
                     {this.state.comments ? this.state.comments.length : "0"}{" "}

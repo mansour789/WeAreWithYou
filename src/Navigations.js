@@ -93,8 +93,8 @@ const  Apppw = createBottomTabNavigator({
     //     )
     //   },
     // },   
-    LoginView: {
-      screen: LoginView,
+    Personal: {
+      screen: Personal,
       navigationOptions: {
         tabBarIcon: ({ focused, horizontal, tintColor }) => (
           <Icon name="ios-person" size={30} style={{ color: 'gray'}} />
@@ -102,8 +102,8 @@ const  Apppw = createBottomTabNavigator({
         )
       },
     },
-    Personal: {
-      screen: Personal,
+    Aboutus: {
+      screen: Aboutus, 
       navigationOptions: {
         showLabel: false,
         tabBarIcon: ({ tintColor }) => (
@@ -115,7 +115,7 @@ const  Apppw = createBottomTabNavigator({
     
   },    
   { 
-    initialRouteName : "Personal", 
+    initialRouteName : "Home", 
     tabBarOptions: {
       activeTintColor: '#C53364',
       inactiveTintColor: 'gray',

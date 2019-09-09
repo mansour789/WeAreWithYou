@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Text, View, FlatList } from "react-native";
 import { Container, Content, List, Body, Right } from "native-base";
 
-import DetelesPost from "./DetelesPost";
+import PostDetails from "./PostDetails";
 
 import axios from "axios";
 import apiUrl from "../../ApiConfig";
@@ -100,7 +100,7 @@ export class Post extends Component {
                     data={this.state.posts}
                     keyExtractor={item => item.id}
                     renderItem={({ item }) => (
-                      <DetelesPost
+                      <PostDetails
                         id={item.id}
                         createdAt={item.createdAt}
                         content={item.content}

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Text, View, FlatList } from "react-native";
 import { Container, Content, List, Body } from "native-base";
 
-import DetelesPost from "./DetelesPost";
+import PostDetails from "./PostDetails";
 import axios from "axios";
 import apiUrl from "../../ApiConfig";
 import SpinnerLoading from "../components/SpinnerLoading";
@@ -104,7 +104,7 @@ export class UserPost extends Component {
                     data={this.state.posts}
                     keyExtractor={item => item._id}
                     renderItem={({ item }) => (
-                      <DetelesPost
+                      <PostDetails
                         id={item._id}
                         createdAt={item.createdAt}
                         content={item.content}
