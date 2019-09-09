@@ -1,14 +1,5 @@
 import React, { Component } from "react";
-import {
-  StyleSheet,
-  Text,
-  KeyboardAvoidingView,
-  View,
-  TouchableHighlight,
-  Image,
-  Alert
-} from "react-native";
-// import { categoriesData } from "../DummyData";
+import { StyleSheet, Text, KeyboardAvoidingView, Platform } from "react-native";
 import {
   Form,
   Textarea,
@@ -17,18 +8,12 @@ import {
   Content,
   Card,
   CardItem,
-  Thumbnail,
-  Button,
-  Icon,
-  Left,
-  Body,
-  Right
+  Button
 } from "native-base";
 import ChooseTopic from "./ChooseTopic";
 import axios from "axios";
-import apiUrl from './ApiConfig'
-import { Platform } from "@unimodules/core";
-
+import apiUrl from "./ApiConfig";
+// import { Platform } from "@unimodules/core";
 
 export default class NewPost extends Component {
   constructor(props) {
@@ -45,34 +30,35 @@ export default class NewPost extends Component {
     });
   };
 
-
   sendPost = () => {
-  
     const config = {
-      headers: {'Authorization': `bearer ${this.props.screenProps.data}`}
-      
+      headers: { Authorization: `bearer ${this.props.screenProps.data}` }
     };
-    
+
     if (this.state.post) {
-      axios.post(`${apiUrl}/categories/${this.state.selected}/posts`,{
-          post: {
-            content: this.state.post
+      axios
+        .post(
+          `${apiUrl}/categories/${this.state.selected}/posts`,
+          {
+            post: {
+              content: this.state.post
+            }
+          },
+          config
+        )
+        .then(res => {
+          if (res.status == 201) {
+            // console.log(res)
+            alert("تم إرسال حكايتك بنجاح");
+
+            this.props.navigation.goBack();
+          } else {
+            alert(res.status);
           }
-      },config).then(res => { 
-        if (res.status == 201){ 
-          
-          // console.log(res)
-          alert("تم إرسال حكايتك بنجاح")
-          this.props.navigation.goBack();
-
-        }else{
-          alert(res.status)
-
-        }
-      }).catch(err=>{
-        alert(err)
-      })
-  
+        })
+        .catch(err => {
+          alert(err);
+        });
     } else {
       alert("لا يمكن إرسال محتوى فارغ");
     }
@@ -80,51 +66,27 @@ export default class NewPost extends Component {
   componentDidMount() {
     const { navigation } = this.props;
     const id = navigation.getParam("id");
-    const topics = navigation.getParam("topics")
+    const topics = navigation.getParam("topics");
     this.setState({ selected: id, topics });
   }
 
   render() {
     // console.log(this.props.screenProps.username)
     return (
-      
-      
       <Container>
         <Content>
           <Header style={{ backgroundColor: "#5F2464" }}>
-            <Text style={styles.header}>
-            اختر موضوع
-            </Text>
+            <Text style={styles.header}>اختر موضوع</Text>
           </Header>
           <Card>
-            {/* <CardItem>
-              <Left>
-                <Thumbnail
-                  source={require(`../assets/Default.png`)}
-                />
-                <Body>
-                  <Text
-                    style={{ fontSize: 20, fontWeight: "500", marginBottom: 4 }}
-                  >
-                    {this.props.screenProps.username}
-                  </Text>
-                </Body>
-              </Left>
-            </CardItem> */}
-            {/* <CardItem><Text>{this.state.selected}</Text></CardItem> */}
             <CardItem transparent>
               <ChooseTopic
                 topics={this.state.topics}
                 topicID={this.topicID}
                 selected={this.state.selected}
-                
               />
-              {/* <Text>{this.state.topics[0]}</Text> */}
             </CardItem>
             <CardItem transparent>
-            {/* <KeyboardAvoidingView style={styles.container} behavior="padding" enabled> */}
-
-            
               <Form>
                 <Textarea
                   onChangeText={post => this.setState({ post })}
@@ -132,7 +94,6 @@ export default class NewPost extends Component {
                   placeholder="اكتب حكايتك هنا"
                 />
               </Form>
-              {/* </KeyboardAvoidingView> */}
             </CardItem>
             <CardItem
               style={{ justifyContent: "center", alignItems: "center" }}
@@ -162,60 +123,16 @@ export default class NewPost extends Component {
           </Card>
         </Content>
       </Container>
-     
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
-   
-  },
-  header: { 
-    color: "white", 
-    fontSize: 20, 
-    fontWeight: "500" ,
-    marginVertical: Platform.OS === "android" ? 17:0
-  },
-  inputContainer: {
-    borderBottomColor: "#F5FCFF",
-    backgroundColor: "#FFFFFF",
-    borderRadius: 30,
-    borderBottomWidth: 1,
-    width: 250,
-    height: 45,
-    marginBottom: 20,
-    flexDirection: "row",
-    alignItems: "center"
-  },
-  inputs: {
-    height: 45,
-    marginLeft: 16,
-    borderBottomColor: "#FFFFFF",
-    flex: 1
-  },
-  inputIcon: {
-    width: 30,
-    height: 30,
-    marginLeft: 15,
-    justifyContent: "center"
-  },
-  buttonContainer: {
-    height: 45,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 20,
-    width: 250,
-    borderRadius: 30
-  },
-  loginButton: {
-    backgroundColor: "#C53364"
-  },
-  loginText: {
-    color: "white"
+  
+  header: {
+    color: "white",
+    fontSize: 20,
+    fontWeight: "500",
+    marginVertical: Platform.OS === "android" ? 17 : 0
   }
 });

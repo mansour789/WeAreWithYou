@@ -4,10 +4,9 @@ import {
   Text,
   View,
   TextInput,
-  Button,
   TouchableHighlight,
   Image,
-  Alert
+  AsyncStorage
 } from "react-native";
 import axios from "axios";
 import apiUrl from "../../ApiConfig";
@@ -21,36 +20,57 @@ export default class SignUp extends Component {
       passwordConfirmation: "",
       photo: ""
     };
-    // this.regiesterUser = this.regiesterUser.bind(this);
   }
 
-  goUignIn = ()=> {
+  goUignIn = () => {
     this.props.navigation.navigate("LoginView");
-  }
-
-   regiesterUser = (userName, password, passwordConfirmation) =>{
-      
-           axios.post(`${apiUrl}/sign-up`, {
-            credentials: {
-              username : userName,
-              password : password,
-              password_confirmation: passwordConfirmation
-              }
-          }).then(res => {
-            // console.log(res)
-            alert(`${res.data.user.username}, ${res.data.user.photo},`)
-            // alert(`${userName}, ${password}, ${passwordConfirmation}`)
-            this.setState({
-              userName : res.data.user.username,
-              photo: res.data.user.photo
-            })
-
-          }).catch(err => {
-            console.log(err)
-          })
-      
-
   };
+
+  regiesterUser = (userName, password, passwordConfirmation) => {
+    const { navigation } = this.props;
+    const screenProps = this.props.screenProps;
+    axios
+      .post(`${apiUrl}/sign-up`, {
+        credentials: {
+          username: userName,
+          password: password,
+          password_confirmation: passwordConfirmation
+        }
+      })
+      .then(res => {
+        const userData = res.data.user;
+        // console.log(res);
+
+        screenProps.setUser(
+          userData.token,
+          userData.username,
+          userData.photo,
+          userData._id
+        );
+
+        this.saveToken(
+          userData.token,
+          userData.username,
+          userData.photo,
+          userData._id
+        );
+        navigation.navigate("Home");
+      })
+      .catch(err => {
+        console.log(err);
+        alert(err);
+      });
+  };
+  async saveToken(token, user, photo, id) {
+    try {
+      await AsyncStorage.setItem(ACCESS_TOKEN, token);
+      await AsyncStorage.setItem(USERNAME, user);
+      await AsyncStorage.setItem(PHOTO, photo);
+      await AsyncStorage.setItem(ID, id);
+    } catch (error) {
+      console.log("somthing wrong" + error);
+    }
+  }
 
   signUp = () => {
     const { userName, password, passwordConfirmation } = this.state;
@@ -58,7 +78,7 @@ export default class SignUp extends Component {
       if (password === passwordConfirmation) {
         // make sign up
 
-       this.regiesterUser(userName, password, passwordConfirmation);
+        this.regiesterUser(userName, password, passwordConfirmation);
       } else {
         alert("كلمة السر وتأكيد كلمة السر ليست متطابقة");
       }

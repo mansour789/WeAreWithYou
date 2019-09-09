@@ -1,26 +1,11 @@
 import React, { Component } from "react";
-import { Text, View, FlatList, Platform } from "react-native";
-import {
-  Container,
-  Header,
-  Content,
-  List,
-  ListItem,
-  Thumbnail,
-  Left,
-  Body,
-  Right,
-  Button,
-  Title,
-  Icon
-} from "native-base";
+import { Text, View, FlatList } from "react-native";
+import { Container, Content, List, Body } from "native-base";
 
 import DetelesPost from "./DetelesPost";
-// import { PostsData } from "../DummyData";
 import axios from "axios";
 import apiUrl from "./ApiConfig";
-import ButtonAdd from "./ButtonAdd";
-
+import SpinnerLoading from "./SpinnerLoading";
 
 export class UserPost extends Component {
   state = {
@@ -28,12 +13,11 @@ export class UserPost extends Component {
     posts: []
   };
 
-  getUserPost = () =>{
-    const id = this.props.screenProps.id
+  getUserPost = () => {
+    const id = this.props.screenProps.id;
     const config = {
-        headers: {'Authorization': `bearer ${this.props.screenProps.data}`}
-        
-      };
+      headers: { Authorization: `bearer ${this.props.screenProps.data}` }
+    };
     //make axios requset
     axios
       .get(`${apiUrl}/users/${id}/posts`, config)
@@ -46,46 +30,42 @@ export class UserPost extends Component {
       .catch(err => {
         console.log(err);
       });
-  }
+  };
   componentDidMount() {
     this.getUserPost();
-   
   }
 
-  deletePost = (post_id) => {
+  deletePost = post_id => {
     const config = {
-      headers: {'Authorization': `bearer ${this.props.screenProps.data}`}
-      
+      headers: { Authorization: `bearer ${this.props.screenProps.data}` }
     };
-    const self = this;
-    // alert("delete Post")
-    axios.delete(`${apiUrl}/posts/${post_id}`, config) 
-    .then(res=> {
-      if(res.status === 204){
-        alert("تم حذف مشاركتك")
-        // self.props.navigation.navigate("Personal");
-          
-        this.getUserPost()
-      }else{
-        alert("خطأ في الاتصال حاول مجددا") 
-      }
-    }).catch(err=>{
-      console.log(err)
-      alert(err)
-    })
-    // alert(post_id)
-  }
 
-  editPost = (post) => {
-    // alert("Edit")
-    this.props.navigation.navigate("EditPost", {post, getUserPost: this.getUserPost})
-  }
+    axios
+      .delete(`${apiUrl}/posts/${post_id}`, config)
+      .then(res => {
+        if (res.status === 204) {
+          alert("تم حذف مشاركتك");
+
+          this.setState({ loading: false });
+          this.getUserPost();
+        } else {
+          alert("خطأ في الاتصال حاول مجددا");
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        alert(err);
+      });
+  };
+
+  editPost = post => {
+    this.props.navigation.navigate("EditPost", {
+      post,
+      getUserPost: this.getUserPost
+    });
+  };
 
   render() {
-    // const { navigation } = this.props; 
-    // const name = navigation.getParam("name");
-    // console.log(this.props.screenProps.id)
-    //5d727fbf18161600171176a5
     return (
       <>
         <Container>
@@ -109,12 +89,10 @@ export class UserPost extends Component {
                     margin: 10
                   }}
                 >
-                    
                   {this.props.screenProps.username}
-                  {this.props.screenProps.id}
+                 
                 </Text>
               </Body>
-              
             </View>
 
             {!this.state.loading ? (
@@ -126,7 +104,7 @@ export class UserPost extends Component {
                     data={this.state.posts}
                     keyExtractor={item => item._id}
                     renderItem={({ item }) => (
-                      <DetelesPost 
+                      <DetelesPost
                         id={item._id}
                         createdAt={item.createdAt}
                         content={item.content}
@@ -143,7 +121,9 @@ export class UserPost extends Component {
                   />
                 )}
               </List>
-            ) : null}
+            ) : (
+              <SpinnerLoading />
+            )}
           </Content>
         </Container>
       </>

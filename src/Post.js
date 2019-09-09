@@ -1,26 +1,13 @@
 import React, { Component } from "react";
-import { Text, View, FlatList, Platform } from "react-native";
-import {
-  Container,
-  Header,
-  Content,
-  List,
-  ListItem,
-  Thumbnail,
-  Left,
-  Body,
-  Right,
-  Button,
-  Title,
-  Icon
-} from "native-base";
-// import Icon from "react-native-vector-icons/Ionicons";
+import { Text, View, FlatList } from "react-native";
+import { Container, Content, List, Body, Right } from "native-base";
+
 import DetelesPost from "./DetelesPost";
-// import { PostsData } from "../DummyData";
+
 import axios from "axios";
 import apiUrl from "./ApiConfig";
 import ButtonAdd from "./ButtonAdd";
-
+import SpinnerLoading from "./SpinnerLoading";
 
 export class Post extends Component {
   state = {
@@ -29,6 +16,12 @@ export class Post extends Component {
   };
 
   componentDidMount() {
+    this.getAppPost();
+  } 
+  componentDidUpdate() {
+    this.getAppPost();
+  }
+  getAppPost = () => {
     const { navigation } = this.props;
     const id = navigation.getParam("id");
     //make axios requset
@@ -43,19 +36,22 @@ export class Post extends Component {
       .catch(err => {
         console.log(err);
       });
-  }
-
+  };
 
   addPost = () => {
-    const {navigation}= this.props;
-    const id = navigation.getParam("id")
-    const topics = navigation.getParam("topics")
-    if(this.props.screenProps.data !== ""){
-      this.props.navigation.navigate("NewPost", {id, posts: this.state.posts, topics})
-    }else{
-      this.props.navigation.navigate("LoginView")
+    const { navigation } = this.props;
+    const id = navigation.getParam("id");
+    const topics = navigation.getParam("topics");
+    if (this.props.screenProps.data !== "") {
+      this.props.navigation.navigate("NewPost", {
+        id,
+        posts: this.state.posts,
+        topics
+      });
+    } else {
+      this.props.navigation.navigate("LoginView");
     }
-  }
+  };
   render() {
     const { navigation } = this.props;
     const name = navigation.getParam("name");
@@ -87,7 +83,11 @@ export class Post extends Component {
                 </Text>
               </Body>
               <Right>
-                <ButtonAdd title={"حكاية"}  colorW={"white"} add={this.addPost} />
+                <ButtonAdd
+                  title={"حكاية"}
+                  colorW={"white"}
+                  add={this.addPost}
+                />
               </Right>
             </View>
 
@@ -113,7 +113,17 @@ export class Post extends Component {
                   />
                 )}
               </List>
-            ) : null}
+            ) : (
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}
+              >
+                <SpinnerLoading />
+              </View>
+            )}
           </Content>
         </Container>
       </>

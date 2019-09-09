@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Header, Content, Spinner } from 'native-base';
+import { Container, Content, Spinner } from 'native-base';
 import {Image} from 'react-native'
 
  class SpinnerLoading extends Component {
@@ -9,7 +9,7 @@ import {Image} from 'react-native'
            
             <Content>
                 <Image source={require('../assets/Default.png')}/>
-              <Spinner />
+              <Spinner color={'#C53364'} />
               
             </Content>
           </Container>

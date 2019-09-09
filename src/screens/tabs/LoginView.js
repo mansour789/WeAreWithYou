@@ -11,12 +11,11 @@ import {
 } from "react-native";
 import axios from "axios";
 import apiUrl from "../../ApiConfig";
-// import Navigations from "../../Navigations";
 
 const ACCESS_TOKEN = "access_token";
 const USERNAME = "username";
-const PHOTO = "photo"
-const ID = "user_id"
+const PHOTO = "photo";
+const ID = "user_id";
 
 export default class LoginView extends Component {
   constructor(props) {
@@ -31,7 +30,7 @@ export default class LoginView extends Component {
 
   checkLogIn = () => {
     Keyboard.dismiss();
-    const { userName, password } = this.state; 
+    const { userName, password } = this.state;
     if (userName && password) {
       //make log in
       this.loginUser(userName, password);
@@ -42,24 +41,32 @@ export default class LoginView extends Component {
 
   loginUser = (userName, password) => {
     const screenProps = this.props.screenProps;
-    const {navigation} = this.props;
+    const { navigation } = this.props;
     axios
       .post(`${apiUrl}/sign-in`, {
         credentials: {
           username: userName,
-          password: password,
-          
+          password: password
         }
       })
       .then(res => {
-        const userData = res.data.user
+        const userData = res.data.user;
         // console.log(res);
-        // alert(`${res.data.user.username}, ${res.data.user.token}`)
-        //token, username, photo, id
-        screenProps.setUser(userData.token, userData.username, userData.photo, userData._id)
-        
-        this.saveToken(userData.token, userData.username, userData.photo, userData._id);
-        navigation.navigate("Home")
+
+        screenProps.setUser(
+          userData.token,
+          userData.username,
+          userData.photo,
+          userData._id
+        );
+
+        this.saveToken(
+          userData.token,
+          userData.username,
+          userData.photo,
+          userData._id
+        );
+        navigation.navigate("Home");
       })
       .catch(err => {
         console.log(err);
@@ -73,26 +80,14 @@ export default class LoginView extends Component {
       await AsyncStorage.setItem(USERNAME, user);
       await AsyncStorage.setItem(PHOTO, photo);
       await AsyncStorage.setItem(ID, id);
-
-      
     } catch (error) {
       console.log("somthing wrong" + error);
     }
   }
-  
-  // async getToken() {
-  //   try {
-  //    let token = await AsyncStorage.getItem(ACCESS_TOKEN);
-  //     alert(`Your TOKEN is ${token}`)
-  //   } catch (error) {
-  //     console.log("somthing wrong" + error);
-  //   }
-  // }
 
-  goRegister = ()=>{
-    
+  goRegister = () => {
     this.props.navigation.navigate("SignUp");
-  }
+  };
 
   render() {
     return (
@@ -107,7 +102,6 @@ export default class LoginView extends Component {
           <TextInput
             style={styles.inputs}
             placeholder="اسم مستعار"
-            // keyboardType="email-address"
             underlineColorAndroid="transparent"
             onChangeText={userName => this.setState({ userName })}
           />
@@ -142,7 +136,6 @@ export default class LoginView extends Component {
         >
           <Text style={{ color: "white" }}>إنشاء حساب</Text>
         </TouchableHighlight>
-        
       </View>
     );
   }
@@ -194,17 +187,3 @@ const styles = StyleSheet.create({
     color: "white"
   }
 });
-
-//         signUp = async () => {
-//           const { username, password, email, phone_number } = this.state
-//           try {
-//             // here place your signup logic
-//             console.log('user successfully signed up!: ', success)
-//           } catch (err) {
-//             console.log('error signing up: ', err)
-//           }
-//         }
-
-//         onChangeText = (key, val) => {
-//           this.setState({ [key]: val })
-//         }

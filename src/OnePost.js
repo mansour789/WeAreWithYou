@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, Image } from "react-native";
+import { Text, StyleSheet } from "react-native";
 import {
   Container,
   Header,
@@ -15,7 +15,6 @@ import {
 } from "native-base";
 import Comments from "./Comments";
 import Moment from "moment";
-import { CommentsData } from "../DummyData";
 import ButtonAdd from "./ButtonAdd";
 import axios from "axios";
 import apiUrl from "./ApiConfig";
@@ -29,6 +28,12 @@ class OnePost extends Component {
   };
   componentDidMount() {
     //get comment  /posts/:post_id/comments
+    this.getAllComments();
+  }
+  // componentDidUpdate(){
+  //   this.getAllComments();
+  // }
+  getAllComments = () => {
     const { navigation } = this.props;
     const id = navigation.getParam("id");
     axios
@@ -59,7 +64,7 @@ class OnePost extends Component {
     const { navigation } = this.props;
     const content = navigation.getParam("content");
     const ownerName = navigation.getParam("ownerName");
-    const title = navigation.getParam("title");
+  
 
     const createdAt = navigation.getParam("createdAt");
     const likes = navigation.getParam("likes");
@@ -91,7 +96,7 @@ class OnePost extends Component {
               <Left>
                 <ButtonAdd title={"تعليق"} add={this.addComment}/>
               </Left>
-              {/* <Body> */}
+            
               <Right>
                 <Button
                   transparent
@@ -103,8 +108,7 @@ class OnePost extends Component {
                   </Text>
                   <Icon active name="chatbubbles" style={{}} />
                 </Button>
-                {/* </Body> */}
-                {/* <Text></Text> */}
+               
               </Right>
             </CardItem>
           </Card>
@@ -124,18 +128,3 @@ class OnePost extends Component {
 }
 
 export default OnePost;
-
-const styles = StyleSheet.create({
-  viewStyle: {
-    flex: 1
-    // flexDirection: "column",
-    // justifyContent: "center",
-    // alignItems: "center"
-  },
-  title: {
-    fontSize: 40
-  },
-  pragh: {
-    fontSize: 20
-  }
-});

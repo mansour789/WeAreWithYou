@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import {
     View,
-    Text,
     StyleSheet,
-    SafeAreaView,
     TextInput,
     Platform,
     StatusBar
@@ -53,12 +51,3 @@ class Explore extends Component {
     }
 }
 export default Explore;
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    }
-});
-

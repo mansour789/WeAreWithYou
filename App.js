@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, Platform, Image, AsyncStorage } from "react-native";
+import {  AsyncStorage } from "react-native";
 
 import Navigations from "./src/Navigations";
 
@@ -15,11 +15,11 @@ export default class App extends React.Component {
     this.getToken();
   }
   setUser = (token, username, photo, id) => {
-    console.log("this is SET user")
+    // console.log("this is SET user")
     this.setState({ token, username, photo, id }); 
   };
   async getToken() {
-    console.log("this. is get token")
+    // console.log("this. is get token")
     try {
       let token = await AsyncStorage.getItem("access_token");
       let username = await AsyncStorage.getItem("username");

@@ -1,76 +1,64 @@
 import React, { Component } from "react";
+import { Text } from "react-native";
+
 import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableHighlight,
-  Image,
-  Alert
-} from "react-native";
-import { categoriesData } from "../DummyData";
-import {
-  Picker,
   Form,
   Textarea,
   Container,
-  Header,
   Content,
   Card,
   CardItem,
   Thumbnail,
   Button,
-  Icon,
   Left,
-  Body,
-  Right
+  Body
 } from "native-base";
-import axios from 'axios'
-import apiUrl from './ApiConfig'
+import axios from "axios";
+import apiUrl from "./ApiConfig";
 
 export default class NewComment extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        comment: ''
+      comment: ""
     };
   }
 
   sendComment = () => {
     const { navigation } = this.props;
-    const id = navigation.getParam("id")
-    
+    const id = navigation.getParam("id");
+
     const config = {
-      headers: {'Authorization': `bearer ${this.props.screenProps.data}`}
-      
+      headers: { Authorization: `bearer ${this.props.screenProps.data}` }
     };
-    
+
     if (this.state.comment) {
-      
-      axios.post(`${apiUrl}/posts/${id}/comments`,{
-        comment: {
-          content: this.state.comment
+      axios
+        .post(
+          `${apiUrl}/posts/${id}/comments`,
+          {
+            comment: {
+              content: this.state.comment
+            }
+          },
+          config
+        )
+        .then(res => {
+          if (res.status === 201) {
+            // console.log(res)
+            alert("تم إرسال تعليقك بنجاح");
+            this.props.navigation.goBack();
+          } else {
+            alert(res.status);
           }
-      },config).then(res => {
-        if (res.status === 201){
-          
-          // console.log(res)
-          alert("تم إرسال تعليقك بنجاح")
-          this.props.navigation.goBack();
-
-        }else{
-          alert(res.status)
-
-        }
-      }).catch(err=>{
-        alert(err)
-      })
-  
+        })
+        .catch(err => {
+          alert(err);
+        });
     } else {
       alert("لا يمكن إرسال محتوى فارغ");
     }
   };
-  
 
   render() {
     // const photo = this.props.screenProps.photo;
@@ -80,9 +68,7 @@ export default class NewComment extends Component {
           <Card>
             <CardItem>
               <Left>
-                <Thumbnail
-                  source={require(`../assets/Default.png`)}
-                />
+                <Thumbnail source={require(`../assets/Default.png`)} />
                 <Body>
                   <Text
                     style={{ fontSize: 20, fontWeight: "500", marginBottom: 4 }}
@@ -95,7 +81,11 @@ export default class NewComment extends Component {
             <CardItem transparent></CardItem>
             <CardItem transparent>
               <Form>
-                <Textarea onChangeText={comment => this.setState({comment})} rowSpan={2} placeholder="اكتب تعليقك هنا" />
+                <Textarea
+                  onChangeText={comment => this.setState({ comment })}
+                  rowSpan={2}
+                  placeholder="اكتب تعليقك هنا"
+                />
               </Form>
             </CardItem>
             <CardItem

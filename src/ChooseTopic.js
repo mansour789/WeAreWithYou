@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Text, Picker, Platform } from "react-native";
+import { StyleSheet, View, Picker } from "react-native";
 
 export default class ChooseTopic extends Component {
   render() {
@@ -10,7 +10,6 @@ export default class ChooseTopic extends Component {
     });
     return (
       <View style={styles.container}>
-        
         <Picker
           style={styles.pickerStyle}
           selectedValue={this.props.selected}
@@ -28,13 +27,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center"
   },
-  // textStyle: {
-  //   // marginBottom: Platform.OS === "android" ? 4 : 24,
-  //   fontSize: 25,
-  //   fontWeight: "bold",
-  //   textAlign: "center",
-  //   color: "#C53364"
-  // },
+
   pickerStyle: {
     height: 50,
     width: "80%",
