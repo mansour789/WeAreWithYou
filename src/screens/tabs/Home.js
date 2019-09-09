@@ -42,7 +42,7 @@ export class Home extends React.Component {
             {this.state.loading ? (
               <SpinnerLoading />
             ) : (
-              <FlatList
+              <FlatList 
                 numColumns={2}
                 data={this.state.categoriesData}
                 keyExtractor={item => item.id}

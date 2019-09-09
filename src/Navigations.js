@@ -80,7 +80,7 @@ const  Apppw = createBottomTabNavigator({
     Home: {
       screen: homeStack,
       navigationOptions: {
-        tabBarIcon: ({ focused, horizontal, tintColor }) => (
+        tabBarIcon: () => (
           <Icon name="ios-home" size={30} style={{ color: 'gray'}} />
         )
       },
@@ -96,7 +96,7 @@ const  Apppw = createBottomTabNavigator({
     Personal: {
       screen: Personal,
       navigationOptions: {
-        tabBarIcon: ({ focused, horizontal, tintColor }) => (
+        tabBarIcon: () => (
           <Icon name="ios-person" size={30} style={{ color: 'gray'}} />
           
         )
@@ -106,7 +106,7 @@ const  Apppw = createBottomTabNavigator({
       screen: Aboutus, 
       navigationOptions: {
         showLabel: false,
-        tabBarIcon: ({ tintColor }) => (
+        tabBarIcon: () => (
           <Image source={require('../assets/Default.png')} style={{width: 45, height: 30}} />
         )
         
