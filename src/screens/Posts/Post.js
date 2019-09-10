@@ -16,6 +16,25 @@ export class Post extends Component {
   componentDidMount() {
     this.getAppPost();
   } 
+  static navigationOptions = ({ navigation, screenProps}) => ({
+    title: navigation.state.params.name,
+    headerRight: <ButtonAdd
+    title={"حكاية"}
+    colorW={"#C53364"}
+    add={() => {
+      const { data } = screenProps;
+      const { topics, id,  } = navigation.state.params;
+      if (data) {
+        navigation.navigate("NewPost", {
+          id,
+          topics
+        });
+      } else {
+        navigation.navigate("LoginView");
+      }
+    }}
+  />
+  })
   // componentDidUpdate() {
 //     NEW POST IS
 // Object {
@@ -101,45 +120,11 @@ export class Post extends Component {
     }
   };
   render() {
-    const { navigation } = this.props;
-    const name = navigation.getParam("name");
-
     
     return (
       <>
         <Container>
           <Content>
-            <View
-              style={{
-                flex: 1,
-                flexDirection: "row",
-                backgroundColor: "#5F2464",
-                borderBottomWidth: 1,
-                borderBottomColor: "#dddddd"
-              }}
-            >
-              <Body>
-                <Text
-                  style={{
-                    fontSize: 30,
-                    fontWeight: "600",
-                    textAlign: "center",
-                    flex: 1,
-                    color: "white",
-                    margin: 10
-                  }}
-                >
-                  {name}
-                </Text>
-              </Body>
-              <Right>
-                <ButtonAdd
-                  title={"حكاية"}
-                  colorW={"white"}
-                  add={this.addPost}
-                />
-              </Right>
-            </View>
 
             {!this.state.loading ? (
               <List>
