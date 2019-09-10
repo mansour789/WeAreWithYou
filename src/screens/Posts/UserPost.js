@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, FlatList } from "react-native";
+import { Text, View, FlatList, Alert } from "react-native";
 import { Container, Content, List, Body } from "native-base";
 
 import PostDetails from "./PostDetails";
@@ -32,6 +32,22 @@ export class UserPost extends Component {
   };
   componentDidMount() {
     this.getUserPost();
+  }
+
+  askBeforeDeletePost = post_id =>{
+    Alert.alert(
+      'حذف حكايتك',
+      'هل تريد حذف حكايتك؟',
+      [
+        {
+          text: 'تراجع',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {text: 'احذف الحكاية', onPress: () => this.deletePost(post_id)},
+      ],
+      {cancelable: false},
+    ); 
   }
 
   deletePost = post_id => {
@@ -109,7 +125,7 @@ export class UserPost extends Component {
                         ownerName={this.props.screenProps.username}
                         ownerPhoto={this.props.screenProps.photo}
                         navigation={this.props.navigation}
-                        deletePost={this.deletePost}
+                        deletePost={this.askBeforeDeletePost}
                         editPost={this.editPost}
                         wholePost={item}
                         isOwner={"YES"}
