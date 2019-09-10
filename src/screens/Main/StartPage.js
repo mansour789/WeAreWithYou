@@ -9,6 +9,11 @@ import Icon from 'react-native-vector-icons/Ionicons'
 
 class Explore extends Component {
 
+
+    state = {
+        
+    }
+
     componentWillMount() {
         this.startHeaderHeight = 80
         if (Platform === 'android') {
@@ -17,6 +22,7 @@ class Explore extends Component {
     }
 
     render() {
+        console.log(this.state.postSearch)
         return (
             
                 <View >
@@ -40,7 +46,7 @@ class Explore extends Component {
                                 placeholder="ابحث عن موضوع"
                                 placeholderTextColor="grey"
                                 style={{ flex: 1, fontWeight: '700', backgroundColor: 'white' }}
-                                onChangeText={postSearch => this.setState({postSearch})}
+                                onChangeText={postSearch => this.props.postSearchHandler(postSearch)}
                             />
                         </View>
                     </View>

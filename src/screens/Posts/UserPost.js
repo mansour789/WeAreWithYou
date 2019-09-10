@@ -6,7 +6,7 @@ import PostDetails from "./PostDetails";
 import { deletePost, getUserPost } from "../../ApiConfig";
 import SpinnerLoading from "../components/SpinnerLoading";
 
-export class UserPost extends Component {
+export class UserPost extends Component { 
   state = {
     loading: true,
     posts: []

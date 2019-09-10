@@ -8,7 +8,7 @@ class Comments extends Component {
     const { Comments } = this.props;
     return (
       <SafeAreaView style={{ flex: 1 }}>
-        <ScrollView scrollEventThrottle={16}>
+        
           <View style={{ flex: 1 }}>
             <List>
               <FlatList
@@ -38,7 +38,7 @@ class Comments extends Component {
               />
             </List>
           </View>
-        </ScrollView>
+       
       </SafeAreaView>
     );
   }

@@ -5,7 +5,7 @@ import { Container, Content, List, Body, Right } from "native-base";
 import PostDetails from "./PostDetails";
 import { getAppPost } from "../../ApiConfig";
 import ButtonAdd from "../components/ButtonAdd";
-import SpinnerLoading from "../components/SpinnerLoading";
+import SpinnerLoading from "../components/SpinnerLoading"; 
 
 export class Post extends Component {
   state = {
@@ -144,7 +144,7 @@ export class Post extends Component {
             {!this.state.loading ? (
               <List>
                 {this.state.posts.length == 0 ? (
-                  <Text>لا توجد قصص في هذا الموضوع </Text>
+                  <Text style={{fontSize: 18, textAlign: "center", marginVertical: 20}}>لا توجد قصص في هذا الموضوع </Text> 
                 ) : (
                   <FlatList
                     data={this.state.posts}

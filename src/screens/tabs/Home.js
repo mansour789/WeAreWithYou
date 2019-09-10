@@ -1,10 +1,10 @@
 import React from "react";
-import { FlatList, StyleSheet, SafeAreaView, ScrollView } from "react-native";
-import { View } from "native-base";
+import { FlatList, StyleSheet, SafeAreaView, ScrollView, View } from "react-native";
+import {  List} from "native-base";
 import Catagories from "../Main/Catagories";
 import StartPage from "../Main/StartPage";
 import SpinnerLoading from "../components/SpinnerLoading";
-import { getCatagories } from "../../ApiConfig";
+import { getCatagories } from "../../ApiConfig"; 
 
 export class Home extends React.Component {
   constructor(props) {
@@ -12,9 +12,14 @@ export class Home extends React.Component {
 
     this.state = {
       categoriesData: [],
-      loading: true
+      loading: true,
+      postSearch: ""
     };
   }
+
+postSearchHandler = (postSearchWord)=> {
+  this.setState({postSearch: postSearchWord})
+}
 
   componentDidMount() {
     getCatagories().then(res => {
@@ -29,18 +34,28 @@ export class Home extends React.Component {
   }
 
   render() {
-    return (
-      <SafeAreaView style={{ flex: 1 }}>
-        <StartPage />
+    let filterdCatagories = this.state.categoriesData.filter(
+      catagory => {
+        return catagory.name.indexOf(this.state.postSearch) !== -1
+      }
+    )
+    return ( 
+     
+      <>
+        <StartPage postSearchHandler={this.postSearchHandler}/>
 
-        <ScrollView scrollEventThrottle={16}>
-          <View style={styles.flat}>
+        
             {this.state.loading ? (
+              <View style={styles.flat}>
               <SpinnerLoading />
+              </View>
             ) : (
+            <List style={{flex: 2, justifyContent: "space-between",
+            alignItems: "center" }}>
               <FlatList
                 numColumns={2}
-                data={this.state.categoriesData}
+                initialNumToRender={10}
+                data={filterdCatagories}
                 keyExtractor={item => item.id}
                 renderItem={({ item }) => (
                   <Catagories
@@ -51,10 +66,11 @@ export class Home extends React.Component {
                   />
                 )}
               />
+        </List>
             )}
-          </View>
-        </ScrollView>
-      </SafeAreaView>
+          
+       </>
+      
     );
   }
 }

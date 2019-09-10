@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View } from "react-native";
 import { Button } from "native-base";
 
-export class Catagories extends React.Component {
+export class Catagories extends React.PureComponent {
   constructor(props) {
     super(props);
 
