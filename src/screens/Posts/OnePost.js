@@ -52,12 +52,18 @@ this.setState({likes})
     const id = navigation.getParam("id");
     getAllComments(id)
       .then(res => {
-        this.setState({
-          comments: res.data.comments,
-          loading: false
-        });
-      })
+        if (res.status === 200){
+          
+          this.setState({
+            loading: false,
+            comments: res.data.comments,
+          });
+        }else{
+          this.setState({loading: false})
+        }
+        })
       .catch(err => {
+        this.setState({loading: false})
         console.log(err);
       });
 
@@ -153,8 +159,8 @@ this.setState({likes})
                   <Text style={{ marginRight: 2 }}>
                     {this.state.comments ? this.state.comments.length : "0"}{" "}
                     تعليقات
-                  </Text>
-                  <Icon active name="chatbubbles"  />
+                  </Text> 
+                  <Icon style={{color : this.state.comments.length > 0 ? "#5F2464": 'grey'}} name="chatbubbles"  />
                 </Button>
                
               </Right>
