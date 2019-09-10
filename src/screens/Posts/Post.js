@@ -16,21 +16,21 @@ export class Post extends Component {
   componentDidMount() {
     this.getAppPost();
   } 
-  componentDidUpdate() {
-    const { navigation } = this.props;
-    const newPost = navigation.getParam("newPost");
-    // console.log(this.state.posts) 
-    if (newPost){
-      this.getAppPost();
-      // console.log("NEW POST IS")
-      // console.log(newPost)
-      // console.log("Old post")
-      // console.log(this.state.posts[1])
-      // this.setState(prevState => ({
-      //   posts: [...prevState.posts, newPost]
-      // }))
-    }
-  }
+  // componentDidUpdate() {
+  //   const { navigation } = this.props;
+  //   const newPost = navigation.getParam("newPost");
+  //   // console.log(this.state.posts) 
+  //   if (newPost){
+  //     // this.getAppPost();
+  //     // console.log("NEW POST IS")
+  //     // console.log(newPost)
+  //     // console.log("Old post")
+  //     // console.log(this.state.posts[1])
+  //     // this.setState(prevState => ({
+  //     //   posts: [...prevState.posts, newPost]
+  //     // }))
+  //   }
+  // }
   getAppPost = () => {
     const { navigation } = this.props;
     const id = navigation.getParam("id");

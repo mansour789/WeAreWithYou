@@ -26,27 +26,21 @@ class OnePost extends Component {
     loading: true
   };
   componentDidMount() {
+
     //get comment  /posts/:post_id/comments
     this.getAllComments();
   }
-  componentDidUpdate(){
-    const { navigation } = this.props;
-    const newComment = navigation.getParam("newComment");
-    if(newComment){
-      // this.getAllComments();
-      this.addNewComment(newComment)
-      
-    }
-  }
-  
-  addNewComment = (newComment)=>{
-
-    
-    console.log("NEW COMMENT IS")
-    console.log(newComment)
-    console.log("Old COMEENT")
-    console.log(this.state.comments[2])
-  }
+  // componentDidUpdate(){
+  //   const { navigation } = this.props;
+  //   const newComment = navigation.getParam("newComment");
+  //   if(newComment){
+  //     // this.getAllComments();
+  //     console.log("NEW POST IS")
+  //     console.log(newComment)
+  //     console.log("Old post")
+  //     console.log(this.state.comments[0])
+  //   }
+  // }
   getAllComments = () => {
     const { navigation } = this.props;
     const id = navigation.getParam("id");
