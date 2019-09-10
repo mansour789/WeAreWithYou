@@ -13,6 +13,29 @@
 import axios from "axios";
 export const apiUrl = "https://support-groups.herokuapp.com";
 
+
+
+export const onPressLike = (token , postId) => {
+  const config = {
+    headers: { Authorization: `bearer ${token}` }
+  };
+  console.log("Ima in api")
+  ///posts/:id/like
+  return axios.patch(`${apiUrl}/posts/${postId}/like`,{},config)
+  .then(res => res)
+    .catch(err => err);
+}
+
+export const onLikeComment = (token , commentId) => {
+  const config = {
+    headers: { Authorization: `bearer ${token}` }
+  };
+  console.log("Ima in api")
+  ///posts/:id/like
+  return axios.patch(`${apiUrl}/comments/${commentId}/like`,{},config)
+  .then(res => res)
+    .catch(err => err);
+}
 export const getCatagories = () => {
   return axios
     .get(`${apiUrl}/categories`)

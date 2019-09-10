@@ -16,19 +16,30 @@ import {
 import Comments from "../comments/Comments";
 import Moment from "moment";
 import ButtonAdd from "../components/ButtonAdd";
-import { getAllComments } from "../../ApiConfig"; 
+import { getAllComments, onPressLike } from "../../ApiConfig"; 
 import SpinnerLoading from "../components/SpinnerLoading";
 
 class OnePost extends Component {
   state = {
     showComment: true,
     comments: [],
-    loading: true
+    loading: true,
+    liked: false,
+    likes: []
   };
   componentDidMount() {
+    const likes = this.props.navigation.getParam('likes');
+this.setState({likes})
 
     //get comment  /posts/:post_id/comments
     this.getAllComments();
+
+    //If user like make liked true
+    const userId = this.props.screenProps.id;
+
+    if(likes.includes(userId)){
+      this.setState({liked: true});
+    }
   }
   addNewComment = (newCommentObject)=> {
    
@@ -62,16 +73,46 @@ class OnePost extends Component {
       this.props.navigation.navigate("LoginView")
     }
   }
+
+  onPressLike = ()=>{
+    const { navigation } = this.props;
+    const userId = this.props.screenProps.id
+    // const likes = navigation.getParam("likes");
+     const token = this.props.screenProps.data
+     const postId = navigation.getParam("id");
+
+     const { liked, likes } = this.state;
+     const currLikes = [...likes];
+     console.log("currLikes ")
+     console.log(currLikes)
+     const indexOfUser = currLikes.indexOf(userId);
+     liked ? currLikes.splice(indexOfUser,1): currLikes.push(userId)
+     
+   console.log("newLides")  
+     console.log()
+    
+     this.setState({liked: !liked, likes: currLikes})
+    onPressLike(token , postId).then(res=>{
+      // console.log(res) 
+      
+    }).catch(err => {
+      console.log(err)
+    })
+
+  }
   render() {
     const { navigation } = this.props;
+    const { liked, likes } = this.state;
+    
     const content = navigation.getParam("content");
     const ownerName = navigation.getParam("ownerName");
-  
+    const userId = this.props.screenProps.id
+   
+     const token = this.props.screenProps.data
+     
 
     const createdAt = navigation.getParam("createdAt");
-    const likes = navigation.getParam("likes");
     const ownerPhoto = navigation.getParam("ownerPhoto");
-
     return (
       <Container>
         <Content>
@@ -99,19 +140,22 @@ class OnePost extends Component {
                 <ButtonAdd title={"تعليق"} add={this.addComment}/>
               </Left>
             <Body>
-              <Text>Like</Text>
+            <Button transparent style={{justifyContent: "center"}} onPress={this.onPressLike}>
+                  <Text style={{marginHorizontal: 7}}> {likes.length}</Text>
+                  <Icon style={{color: !liked ? 'grey': '#C53364'}} name="thumbs-up" />
+                </Button>
             </Body>
               <Right>
-                {/* <Button
+                <Button
                   transparent
-                  onPress={() => this.setState({ showComment: true })} 
-                > */}
+                   
+                >
                   <Text style={{ marginRight: 2 }}>
                     {this.state.comments ? this.state.comments.length : "0"}{" "}
                     تعليقات
                   </Text>
-                  <Icon active name="chatbubbles" style={{}} />
-                {/* </Button> */}
+                  <Icon active name="chatbubbles"  />
+                </Button>
                
               </Right>
             </CardItem>
@@ -120,7 +164,7 @@ class OnePost extends Component {
               {this.state.loading ? (
                 <SpinnerLoading />
               ) : (
-                <Comments Comments={this.state.comments} />
+                <Comments Comments={this.state.comments} userId={userId} token={token}/>
               )}
            
         </Content>

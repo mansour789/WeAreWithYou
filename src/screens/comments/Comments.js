@@ -30,6 +30,8 @@ class Comments extends Component {
                     likes={item.likes}
                     ownerName={item.owner.username}
                     ownerPhoto={item.owner.photo}
+                    token={this.props.token}
+                    userId={this.props.userId}
                     navigation={this.props.navigation}
                   />
                 )}

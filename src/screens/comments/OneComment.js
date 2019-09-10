@@ -11,8 +11,60 @@ import {
   Body,
   Right
 } from "native-base";
+import { onLikeComment } from '../../ApiConfig'
 
 class OneComment extends Component {
+
+  state = {
+    liked: false,
+    likes: []
+  }
+  componentDidMount() {
+    const likes = this.props.likes;
+this.setState({likes})
+
+    
+
+    //If user like make liked true
+    const userId = this.props.userId;
+    
+
+    if(likes.includes(userId)){
+      this.setState({liked: true});
+    }
+  }
+
+  onLikeComment = () => {
+//(token , commentId)
+    // const { navigation } = this.props;
+    // const likes = navigation.getParam("likes");
+    //  const postId = navigation.getParam("id");
+    // const userId = this.props.screenProps.id
+    
+    const { token, id, userId} = this.props;
+     const { liked, likes } = this.state;
+     const currLikes = [...likes];
+     console.log("currLikes ")
+     console.log(currLikes)
+     const indexOfUser = currLikes.indexOf(userId);
+     liked ? currLikes.splice(indexOfUser,1): currLikes.push(userId)
+     
+   console.log("newLides")  
+     console.log(likes)
+    
+     this.setState({liked: !liked, likes: currLikes}) 
+     onLikeComment(token , id).then(res=>{
+      // console.log(res) 
+      
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+
+
+
+
+  
   render() {
     const { id, createdAt, content, likes, ownerName, ownerPhoto } = this.props;
     return (
@@ -26,13 +78,13 @@ class OneComment extends Component {
           </Left>
         </CardItem>
         <CardItem transparent>
-          <Text>{content}.</Text>
+          <Text>{content}</Text>
         </CardItem>
         <CardItem>
           <Left>
-            <Button transparent onPress={() => alert("Click Like")}>
-              <Icon active name="thumbs-up" />
-              <Text style={{ margin: 5 }}>{likes}</Text>
+            <Button transparent onPress={this.onLikeComment}>
+              <Icon style={{color: !this.state.liked ? 'grey': '#C53364'}} name="thumbs-up" />
+              <Text style={{ margin: 5 }}>{this.state.likes.length}</Text>
             </Button>
           </Left>
           <Right>
