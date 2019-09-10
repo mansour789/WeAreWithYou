@@ -11,6 +11,21 @@ import {
 } from "native-base";
 import {  } from "react-native-gesture-handler";
 export default class ListPost extends Component {
+
+  // static navigationOptions = ({ navigation }) => {
+  //   // const params = navigation.state.params || {};
+
+  //   return {
+      
+  //     headerLeft: (
+  //       <Button
+  //         onPress={() => navigation.navigate('Personal')}
+  //       />
+  //     )
+  //   };
+  // };
+
+
   seeUserPosts = () => {
     const { content, ownerName, id, createdAt, likes, ownerPhoto } = this.props;
     this.props.navigation.navigate("OnePost", {

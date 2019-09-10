@@ -10,13 +10,45 @@ import SpinnerLoading from "../components/SpinnerLoading";
 export class Post extends Component {
   state = {
     loading: true,
-    posts: []
+    posts: [],
   };
 
   componentDidMount() {
     this.getAppPost();
   } 
   // componentDidUpdate() {
+//     NEW POST IS
+// Object {
+//   "post": Object {
+//     "__v": 0,
+//     "_id": "5d778948a386a1001728a6c0",
+//     "category": "5d714e6109f9870004a3bbdf",
+//     "content": "Zzzzzzzzzzzzzzzzzz",
+//     "createdAt": "2019-09-10T11:30:16.791Z",
+//     "likes": Array [],
+//     "owner": Object {
+//       "__v": 0,
+//       "_id": "5d727fbf18161600171176a5",
+//       "createdAt": "2019-09-06T15:48:15.343Z",
+//       "photo": "Default",
+//       "token": "c61c91428ac329339d510ea0be1c0adf",
+//       "updatedAt": "2019-09-10T08:16:07.057Z",
+//       "username": "Mansour",
+//     },
+//     "updatedAt": "2019-09-10T11:30:16.791Z",
+//   },
+// }
+// Old post
+// Object {
+//   "content": "انا اتعرض للتعنيف النفسي من شخص اسمه حاز* ,وانا ما ابي الا الستر وابيكم بس تخففون علي الالم النفسي 💔 ",
+//   "createdAt": "2019-09-10T10:52:00.090Z",
+//   "id": "5d77805092312f001726fdb6",
+//   "likes": Array [],
+//   "owner": Object {
+//     "photo": "Default",
+//     "username": "Azzam",
+//   },
+// }
   //   const { navigation } = this.props;
   //   const newPost = navigation.getParam("newPost");
   //   // console.log(this.state.posts) 
@@ -46,7 +78,12 @@ export class Post extends Component {
         console.log(err);
       });
   };
-  
+  addNewPost = (newPostObject)=> {
+   
+    this.setState(prevState => ({
+      posts: [newPostObject, ...prevState.posts]
+    }))
+  }
 
   addPost = () => {
     const { navigation } = this.props;
@@ -56,7 +93,8 @@ export class Post extends Component {
       this.props.navigation.navigate("NewPost", {
         id,
         posts: this.state.posts,
-        topics
+        topics,
+        addNewPost: this.addNewPost
       });
     } else {
       this.props.navigation.navigate("LoginView");
@@ -65,6 +103,8 @@ export class Post extends Component {
   render() {
     const { navigation } = this.props;
     const name = navigation.getParam("name");
+
+    
     return (
       <>
         <Container>
@@ -108,7 +148,14 @@ export class Post extends Component {
                 ) : (
                   <FlatList
                     data={this.state.posts}
-                    keyExtractor={item => item.id}
+                    keyExtractor={item => {
+                      if (item.id){
+                        return item.id
+              
+                      }else{
+                        return item._id
+                      }
+                    }}
                     renderItem={({ item }) => (
                       <PostDetails
                         id={item.id}

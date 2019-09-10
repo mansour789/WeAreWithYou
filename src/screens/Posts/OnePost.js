@@ -30,17 +30,12 @@ class OnePost extends Component {
     //get comment  /posts/:post_id/comments
     this.getAllComments();
   }
-  // componentDidUpdate(){
-  //   const { navigation } = this.props;
-  //   const newComment = navigation.getParam("newComment");
-  //   if(newComment){
-  //     // this.getAllComments();
-  //     console.log("NEW POST IS")
-  //     console.log(newComment)
-  //     console.log("Old post")
-  //     console.log(this.state.comments[0])
-  //   }
-  // }
+  addNewComment = (newCommentObject)=> {
+   
+    this.setState(prevState => ({
+      comments: [newCommentObject, ...prevState.comments]
+    }))
+  }
   getAllComments = () => {
     const { navigation } = this.props;
     const id = navigation.getParam("id");
@@ -62,7 +57,7 @@ class OnePost extends Component {
     const id = navigation.getParam("id")
     if(this.props.screenProps.data){
       
-      this.props.navigation.navigate("NewComment", {id})
+      this.props.navigation.navigate("NewComment", {id, addNewComment: this.addNewComment})
     }else{
       this.props.navigation.navigate("LoginView")
     }

@@ -20,8 +20,10 @@ const homeStack = createStackNavigator({
     Home: { 
       screen: Home, 
       navigationOptions:{
-        title  : "العناوين الرئيسية",
-       
+        title  : "الصفحة الرئيسية",
+        headerStyle: {
+          backgroundColor: '#C53364',
+        }
       }
     },
     Post: {  
@@ -29,7 +31,7 @@ const homeStack = createStackNavigator({
       
     },
     Personal: {  
-        screen: Personal, 
+        screen: Personal,
         
       },
       OnePost: {  
@@ -40,36 +42,54 @@ const homeStack = createStackNavigator({
           screen: NewPost, 
           navigationOptions:{
             title  : "حكاية جديدة",
+            headerStyle: {
+              backgroundColor: '#C53364',
+            }
           }
         },
         LoginView: {  
             screen: LoginView, 
             navigationOptions:{
               title  : "تسجيل الدخول",
+              headerStyle: {
+                backgroundColor: '#C53364',
+              }
             }
           },
           NewComment: {  
               screen: NewComment, 
               navigationOptions:{
                 title  : "تعليق جديد",
+                headerStyle: {
+                  backgroundColor: '#C53364',
+                }
               }
             },
             UserPost: {
               screen: UserPost,
               navigationOptions:{
-                title: "مشاركاتك"
+                title: "مشاركاتك",
+                headerStyle: {
+                  backgroundColor: '#C53364',
+                }
               }
             },
             SignUp: {
               screen: SignUp,
               navigationOptions:{
-                title: "إنشاء حساب"
+                title: "إنشاء حساب",
+                headerStyle: {
+                  backgroundColor: '#C53364',
+                }
               }
             },
             EditPost: {
               screen: EditPost,
               navigationOptions:{
-                title: "تعديل حكايتك"
+                title: "تعديل حكايتك",
+                headerStyle: {
+                  backgroundColor: '#C53364',
+                }
               }
             }
   })

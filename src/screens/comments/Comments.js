@@ -14,7 +14,14 @@ class Comments extends Component {
               <FlatList
                 initialNumToRender={3}
                 data={Comments}
-                keyExtractor={item => item.id}
+                keyExtractor={item => {
+                  if (item.id){
+                    return item.id
+          
+                  }else{
+                    return item._id
+                  }
+                }}
                 renderItem={({ item }) => (
                   <OneComment
                     id={item.id}

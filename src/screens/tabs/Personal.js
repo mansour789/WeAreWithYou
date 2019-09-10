@@ -10,19 +10,25 @@ import {
 import { signOut } from "../../ApiConfig";
 
 export default class Personal extends Component {
+
+  
+
   seeUserPost = () => {
-    this.props.navigation.navigate("UserPost");
+    const{ navigation }= this.props;
+    navigation.navigate("UserPost");
   };
 
   signOut = () => {
     const screenProps = this.props.screenProps;
     signOut(screenProps.data).then(res =>{
-
+      screenProps.setUser("", "", "", "");
+      this.rmoveToken();
       if (res.status === 204) {
-        screenProps.setUser("", "", "", "");
-        this.rmoveToken();
+        
         alert("تم تسجيل الخروج ");
       } else {
+        
+        // console.log(res)
         alert("خطأ في الاتصال حاول مجددا");
       }
     }).catch(err => {

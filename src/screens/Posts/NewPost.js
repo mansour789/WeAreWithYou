@@ -36,6 +36,7 @@ export default class NewPost extends Component {
     
 
     if (this.state.post) {
+      const { navigation } = this.props;
       sendPost(token, selected, data)
       
         .then(res => {
@@ -43,7 +44,9 @@ export default class NewPost extends Component {
             // console.log(res)
             alert("تم إرسال حكايتك بنجاح");
               // console.log(res.data)
-            this.props.navigation.navigate("Post",{newPost: res.data});
+              const addNewPost = navigation.getParam("addNewPost");
+              addNewPost(res.data.post)
+            this.props.navigation.navigate("Post",{newPost: res.data.post});
           } else {
             alert(res.status);
           }
@@ -59,6 +62,7 @@ export default class NewPost extends Component {
     const { navigation } = this.props;
     const id = navigation.getParam("id");
     const topics = navigation.getParam("topics");
+    
     this.setState({ selected: id, topics });
   }
 
