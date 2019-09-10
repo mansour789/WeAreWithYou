@@ -29,14 +29,28 @@ class OnePost extends Component {
     //get comment  /posts/:post_id/comments
     this.getAllComments();
   }
-  // componentDidUpdate(){
-  //   this.getAllComments();
-  // }
+  componentDidUpdate(){
+    const { navigation } = this.props;
+    const newComment = navigation.getParam("newComment");
+    if(newComment){
+      // this.getAllComments();
+      this.addNewComment(newComment)
+      
+    }
+  }
+  
+  addNewComment = (newComment)=>{
+
+    
+    console.log("NEW COMMENT IS")
+    console.log(newComment)
+    console.log("Old COMEENT")
+    console.log(this.state.comments[2])
+  }
   getAllComments = () => {
     const { navigation } = this.props;
     const id = navigation.getParam("id");
     getAllComments(id)
-    
       .then(res => {
         this.setState({
           comments: res.data.comments,
@@ -113,15 +127,13 @@ class OnePost extends Component {
               </Right>
             </CardItem>
           </Card>
-          {this.state.showComment ? (
-            <>
+          
               {this.state.loading ? (
                 <SpinnerLoading />
               ) : (
                 <Comments Comments={this.state.comments} />
               )}
-            </>
-          ) : null}
+           
         </Content>
       </Container>
     );

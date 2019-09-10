@@ -35,7 +35,7 @@ export default class NewComment extends Component {
           if (res.status === 201) {
             // console.log(res)
             alert("تم إرسال تعليقك بنجاح");
-            this.props.navigation.goBack();
+            this.props.navigation.navigate("OnePost", {newComment: res.data.comment});
           } else {
             alert(res.status);  
           }

@@ -42,8 +42,8 @@ export default class NewPost extends Component {
           if (res.status == 201) {
             // console.log(res)
             alert("تم إرسال حكايتك بنجاح");
-
-            this.props.navigation.goBack();
+              // console.log(res.data)
+            this.props.navigation.navigate("Post",{newPost: res.data});
           } else {
             alert(res.status);
           }

@@ -42,7 +42,7 @@ const styles = {
     shadowOffset: { width: 2, height: 5 },
     shadowOpacity: 0.5,
     shadowRadius: 10,
-    evaluation: 3
+    evaluation: 1
   },
   title: {
     color: "white",
