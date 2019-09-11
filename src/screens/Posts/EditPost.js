@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, Platform } from "react-native";
+import { StyleSheet, Text, Platform , Keyboard} from "react-native";
 
 import {
   Form,
@@ -23,6 +23,7 @@ export default class EditPost extends Component {
   }
 
   editPost = () => {
+    Keyboard.dismiss();
     const { navigation } = this.props;
     const getUserPost = navigation.getParam("getUserPost");
     const self = this;

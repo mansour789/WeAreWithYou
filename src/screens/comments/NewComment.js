@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text } from "react-native";
+import { Text, Keyboard } from "react-native";
 
 import {
   Form,
@@ -24,6 +24,7 @@ export default class NewComment extends Component {
   }
 
   sendComment = () => { 
+    Keyboard.dismiss();
     const { navigation } = this.props;
     const addNewComment = navigation.getParam("addNewComment");
     const id = navigation.getParam("id");

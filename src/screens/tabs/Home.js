@@ -79,6 +79,7 @@ export default Home;
 
 const styles = StyleSheet.create({
   flat: {
+    flex:1,
     justifyContent: "space-between",
     alignItems: "center"
   }

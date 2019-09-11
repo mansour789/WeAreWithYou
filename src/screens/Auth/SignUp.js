@@ -3,6 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
+  Keyboard,
   TextInput,
   TouchableHighlight,
   Image,
@@ -70,6 +71,7 @@ export default class SignUp extends Component {
   }
 
   signUp = () => {
+    Keyboard.dismiss();
     const { userName, password, passwordConfirmation } = this.state;
     if (userName && password && passwordConfirmation) {
       if (password === passwordConfirmation) {

@@ -15,26 +15,34 @@ export class Post extends Component {
 
   componentDidMount() {
     this.getAppPost();
+    this.props.navigation.setParams({
+      addPost: this.addPost
+  });
   } 
-  static navigationOptions = ({ navigation, screenProps}) => ({
+  static navigationOptions = ({ navigation, screenProps}) => {
+    const {params = {}} = navigation.state;
+    return({
     title: navigation.state.params.name,
     headerRight: <ButtonAdd
     title={"حكاية"}
     colorW={"#C53364"}
-    add={() => {
-      const { data } = screenProps;
-      const { topics, id,  } = navigation.state.params;
-      if (data) {
-        navigation.navigate("NewPost", {
-          id,
-          topics
-        });
-      } else {
-        navigation.navigate("LoginView");
-      }
-    }}
+    add={()=> params.addPost()}
+    //   () => {
+    //   const { data } = screenProps;
+    //   const { topics, id,  } = navigation.state.params;
+    //   if (data) {
+    //     navigation.navigate("NewPost", {
+    //       id,
+    //       topics,
+    //       addNewPost: this.addNewPost
+    //     });
+    //   } else {
+    //     navigation.navigate("LoginView");
+    //   }
+    // }
+  // }
   />
-  })
+  })}
  
   getAppPost = () => {
     const { navigation } = this.props;
@@ -52,6 +60,7 @@ export class Post extends Component {
         console.log(err);
       });
   };
+  
   addNewPost = (newPostObject)=> {
    console.log("Iam on Post")
     this.setState(prevState => ({
@@ -67,7 +76,7 @@ export class Post extends Component {
       this.props.navigation.navigate("NewPost", {
         id,
         posts: this.state.posts,
-        addNewPost: this.addNewPost(),
+        addNewPost: this.addNewPost,
         topics,
       });
     } else {

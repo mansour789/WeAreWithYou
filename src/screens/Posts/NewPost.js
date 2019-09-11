@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, KeyboardAvoidingView, Platform } from "react-native";
+import { StyleSheet, Text, KeyboardAvoidingView, Platform, Keyboard } from "react-native";
 import {
   Form,
   Textarea,
@@ -28,35 +28,73 @@ export default class NewPost extends Component {
       selected: value
     });
   };
+  /////////////
 
   sendPost = () => {
-    const token = this.props.screenProps.data;
-    const selected = this.state.selected;
-    const data = this.state.post;
-    const { navigation } = this.props;
-    const addNewPost = navigation.getParam("addNewPost");
+    Keyboard.dismiss();
+    const token = this.props.screenProps.data
+    const selected = this.state.selected
+    const data = this.state.post
+   
+    const addNewPost = this.props.navigation.getParam("addNewPost");
+    
 
     if (this.state.post) {
       sendPost(token, selected, data)
+      
         .then(res => {
           if (res.status === 201) {
-            console.log("res");
-            addNewPost(res.data.post);
-            alert("تم إرسال حكايتك بنجاح"); 
-            // console.log(res.data)
-            this.props.navigation.navigate("Post", { newPost: res.data.post });
+            // console.log(res)
+            alert("تم إرسال حكايتك بنجاح");
+              // console.log(res.data)
+              console.log("res.data.post")
+              console.log(res.data.post)
+              addNewPost(res.data.post)
+            this.props.navigation.navigate("Post",{newPost: res.data.post});
           } else {
             alert(res.status);
           }
         })
         .catch(err => {
-          console.log("object");
-          alert(err);
+          // alert(err);
+          console.log(err)
+          console.log("err")
         });
     } else {
       alert("لا يمكن إرسال محتوى فارغ");
     }
   };
+
+  //////////////
+
+  // sendPost = () => {
+  //   const token = this.props.screenProps.data;
+  //   const selected = this.state.selected;
+  //   const data = this.state.post;
+  //   const { navigation } = this.props;
+  //   const addNewPost = navigation.getParam("addNewPost");
+
+  //   if (this.state.post) {
+  //     sendPost(token, selected, data)
+  //       .then(res => {
+  //         if (res.status === 201) {
+  //           console.log("res");
+  //           addNewPost(res.data.post);
+  //           alert("تم إرسال حكايتك بنجاح"); 
+  //           // console.log(res.data)
+  //           this.props.navigation.navigate("Post", { newPost: res.data.post });
+  //         } else {
+  //           alert(res.status);
+  //         }
+  //       })
+  //       .catch(err => {
+  //         console.log("object");
+  //         alert(err);
+  //       });
+  //   } else {
+  //     alert("لا يمكن إرسال محتوى فارغ");
+  //   }
+  // };
   componentDidMount() {
     const { navigation } = this.props;
     const id = navigation.getParam("id");
@@ -76,6 +114,7 @@ export default class NewPost extends Component {
           <Header style={{ backgroundColor: "#5F2464" }}>
             <Text style={styles.header}>اختر موضوع</Text>
           </Header>
+        <KeyboardAvoidingView > 
           <Card>
             <CardItem transparent>
               <ChooseTopic
@@ -84,15 +123,18 @@ export default class NewPost extends Component {
                 selected={this.state.selected}
               />
             </CardItem>
+            
             <CardItem transparent>
               <Form>
                 <Textarea
+                autoCapitalize={"none"}
                   onChangeText={post => this.setState({ post })}
                   rowSpan={4}
                   placeholder="اكتب حكايتك هنا"
                 />
               </Form>
             </CardItem>
+            
             <CardItem
               style={{ justifyContent: "center", alignItems: "center" }}
             >
@@ -119,6 +161,7 @@ export default class NewPost extends Component {
               </Button>
             </CardItem>
           </Card>
+            </KeyboardAvoidingView>
         </Content>
       </Container>
     );
