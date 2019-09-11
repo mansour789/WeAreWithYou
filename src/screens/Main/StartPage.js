@@ -22,7 +22,7 @@ class Explore extends Component {
     }
 
     render() {
-        console.log(this.state.postSearch)
+        
         return (
             
                 <View >

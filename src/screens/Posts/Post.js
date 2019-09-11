@@ -35,53 +35,7 @@ export class Post extends Component {
     }}
   />
   })
-  // componentDidUpdate() {
-//     NEW POST IS
-// Object {
-//   "post": Object {
-//     "__v": 0,
-//     "_id": "5d778948a386a1001728a6c0",
-//     "category": "5d714e6109f9870004a3bbdf",
-//     "content": "Zzzzzzzzzzzzzzzzzz",
-//     "createdAt": "2019-09-10T11:30:16.791Z",
-//     "likes": Array [],
-//     "owner": Object {
-//       "__v": 0,
-//       "_id": "5d727fbf18161600171176a5",
-//       "createdAt": "2019-09-06T15:48:15.343Z",
-//       "photo": "Default",
-//       "token": "c61c91428ac329339d510ea0be1c0adf",
-//       "updatedAt": "2019-09-10T08:16:07.057Z",
-//       "username": "Mansour",
-//     },
-//     "updatedAt": "2019-09-10T11:30:16.791Z",
-//   },
-// }
-// Old post
-// Object {
-//   "content": "انا اتعرض للتعنيف النفسي من شخص اسمه حاز* ,وانا ما ابي الا الستر وابيكم بس تخففون علي الالم النفسي 💔 ",
-//   "createdAt": "2019-09-10T10:52:00.090Z",
-//   "id": "5d77805092312f001726fdb6",
-//   "likes": Array [],
-//   "owner": Object {
-//     "photo": "Default",
-//     "username": "Azzam",
-//   },
-// }
-  //   const { navigation } = this.props;
-  //   const newPost = navigation.getParam("newPost");
-  //   // console.log(this.state.posts) 
-  //   if (newPost){
-  //     // this.getAppPost();
-  //     // console.log("NEW POST IS")
-  //     // console.log(newPost)
-  //     // console.log("Old post")
-  //     // console.log(this.state.posts[1])
-  //     // this.setState(prevState => ({
-  //     //   posts: [...prevState.posts, newPost]
-  //     // }))
-  //   }
-  // }
+ 
   getAppPost = () => {
     const { navigation } = this.props;
     const id = navigation.getParam("id");
@@ -92,13 +46,14 @@ export class Post extends Component {
           posts: res.data.posts,
           loading: false
         });
+        
       })
       .catch(err => {
         console.log(err);
       });
   };
   addNewPost = (newPostObject)=> {
-   
+   console.log("Iam on Post")
     this.setState(prevState => ({
       posts: [newPostObject, ...prevState.posts]
     }))
@@ -112,8 +67,8 @@ export class Post extends Component {
       this.props.navigation.navigate("NewPost", {
         id,
         posts: this.state.posts,
+        addNewPost: this.addNewPost(),
         topics,
-        addNewPost: this.addNewPost
       });
     } else {
       this.props.navigation.navigate("LoginView");

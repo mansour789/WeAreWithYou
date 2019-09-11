@@ -30,28 +30,27 @@ export default class NewPost extends Component {
   };
 
   sendPost = () => {
-    const token = this.props.screenProps.data
-    const selected = this.state.selected
-    const data = this.state.post
-    
+    const token = this.props.screenProps.data;
+    const selected = this.state.selected;
+    const data = this.state.post;
+    const { navigation } = this.props;
+    const addNewPost = navigation.getParam("addNewPost");
 
     if (this.state.post) {
-      const { navigation } = this.props;
       sendPost(token, selected, data)
-      
         .then(res => {
-          if (res.status == 201) {
-            // console.log(res)
-            alert("تم إرسال حكايتك بنجاح");
-              // console.log(res.data)
-              const addNewPost = navigation.getParam("addNewPost");
-              addNewPost(res.data.post)
-            this.props.navigation.navigate("Post",{newPost: res.data.post});
+          if (res.status === 201) {
+            console.log("res");
+            addNewPost(res.data.post);
+            alert("تم إرسال حكايتك بنجاح"); 
+            // console.log(res.data)
+            this.props.navigation.navigate("Post", { newPost: res.data.post });
           } else {
             alert(res.status);
           }
         })
         .catch(err => {
+          console.log("object");
           alert(err);
         });
     } else {
@@ -62,7 +61,10 @@ export default class NewPost extends Component {
     const { navigation } = this.props;
     const id = navigation.getParam("id");
     const topics = navigation.getParam("topics");
-    
+    // const addNewPost = navigation.getParam("addNewPost");
+    // console.log("addNewPost")
+    // console.log(addNewPost)
+
     this.setState({ selected: id, topics });
   }
 
@@ -124,7 +126,6 @@ export default class NewPost extends Component {
 }
 
 const styles = StyleSheet.create({
-  
   header: {
     color: "white",
     fontSize: 20,

@@ -23,7 +23,7 @@ export default class NewComment extends Component {
     };
   }
 
-  sendComment = () => {
+  sendComment = () => { 
     const { navigation } = this.props;
     const addNewComment = navigation.getParam("addNewComment");
     const id = navigation.getParam("id");
