@@ -14,7 +14,7 @@ import { regiesterUser } from "../../ApiConfig";
 const ACCESS_TOKEN = "access_token";
 const USERNAME = "username";
 const PHOTO = "photo";
-const ID = "user_id"; 
+const ID = "user_id";
 
 export default class SignUp extends Component {
   constructor(props) {
@@ -36,7 +36,12 @@ export default class SignUp extends Component {
     const screenProps = this.props.screenProps;
     regiesterUser(userName, password, passwordConfirmation)
       .then(res => {
-        // console.log(res);
+        if (res.response) {
+          if (res.response.data.code == 11000) {
+            alert("هذا الاسم مستخدم من قبل, نرجو اختيار اسم اخر");
+            return;
+          }
+        }
         const userData = res.data.user;
 
         screenProps.setUser(

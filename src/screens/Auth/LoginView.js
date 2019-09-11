@@ -43,8 +43,14 @@ export default class LoginView extends Component {
     const { navigation } = this.props;
     loginUser(userName, password)
       .then(res => {
+        if (res.response) {
+          if (res.response.data.name == "BadCredentialsError") {
+            alert("اسم المستخدم أو كلمة المرور غير صحيحة");
+            return;
+          }
+        } 
         const userData = res.data.user;
-        // console.log(res);
+        
 
         screenProps.setUser(
           userData.token,

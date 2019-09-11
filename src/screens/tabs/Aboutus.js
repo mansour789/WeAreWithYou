@@ -16,10 +16,8 @@ export default class Aboutus extends Component {
 
           <Text style={styles.name}>
           {/* <Text> */}
-            TEST ipsum dolor sit amet consectetur adipisicing elit. Facere
-            dolor eos amet expedita voluptatem consequuntur non soluta, error,
-            impedit rerum quibusdam unde incidunt! Autem modi sequi temporibus,
-            ducimus quis reiciendis?
+            حنا معك , تطبيق يتيح للمسخدم الدخول في مجموعات الدعم, للتحدث مع من يعانون من نفس المشكلة ليدعموك وتدعمهم.
+
           </Text>
        </View>
        
@@ -56,6 +54,8 @@ const styles = StyleSheet.create({
     fontSize: 22,
     color: "#FFF",
     fontWeight: "600",
-    marginTop: 30
+    marginTop: 30,
+    textAlign: "center"
+
   }
 });

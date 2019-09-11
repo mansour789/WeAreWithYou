@@ -47,6 +47,7 @@ const styles = {
   title: {
     color: "white",
     fontWeight: "bold",
-    fontSize: 25
+    fontSize: 25,
+    textAlign: 'center'
   }
 };

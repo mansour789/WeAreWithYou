@@ -59,12 +59,12 @@ export default class Personal extends Component {
     if (this.props.screenProps.data) {
       buttons = (
         <>
-          <TouchableHighlight
+          {/* <TouchableHighlight
             style={[styles.buttonContainer, styles.loginButton]}
             onPress={() => alert("click add email")}
           >
             <Text style={styles.loginText}>اربط حسابك مع الايميل</Text>
-          </TouchableHighlight>
+          </TouchableHighlight> */}
           <TouchableHighlight
             style={[styles.buttonContainer, styles.loginButton]}
             onPress={this.seeUserPost}
