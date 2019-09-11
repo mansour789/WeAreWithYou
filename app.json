@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "We Are With You",
+    "name": "حنا معك",
     "slug": "WeAreWithYou",
     "privacy": "public",
     "sdkVersion": "34.0.0",
@@ -24,7 +24,12 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.mansourtech.weAreWithYou",
       "supportsTablet": true
+
+    },
+    "android": {
+      "package": "com.mansourtech.weAreWithYou"
     }
   }
 }
