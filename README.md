@@ -18,3 +18,7 @@ you can run by your android or ios device by using the expo app or you can you u
 ```
 expo r
 ```
+
+##Expo
+
+You can see the App on expo application. Click [here](https://expo.io/@mansour789/WeAreWithYou) and scan the barcode.
