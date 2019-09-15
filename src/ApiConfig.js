@@ -1,5 +1,5 @@
 // let apiUrl
-// const expressPort = 3000
+const expressPort = 3000
 // const apiUrls = {
 //   production: 'https://support-groups.herokuapp.com',
 //   development: `http://localhost:${expressPort}`
@@ -11,36 +11,43 @@
 //   apiUrl = apiUrls.production
 // }
 import axios from "axios";
-export const apiUrl = "https://support-groups.herokuapp.com";
+export const apiUrl = `http://localhost:${expressPort}`; 
 
-
-
-export const onPressLike = (token , postId) => {
+export const onPressLike = (token, postId) => {
   const config = {
     headers: { Authorization: `bearer ${token}` }
   };
-  console.log("Ima in api")
+  console.log("Ima in api");
   ///posts/:id/like
-  return axios.patch(`${apiUrl}/posts/${postId}/like`,{},config)
-  .then(res => res)
+  return axios
+    .patch(`${apiUrl}/posts/${postId}/like`, {}, config)
+    .then(res => res)
     .catch(err => err);
-}
+};
 
-export const onLikeComment = (token , commentId) => {
+export const onLikeComment = (token, commentId) => {
   const config = {
     headers: { Authorization: `bearer ${token}` }
   };
-  console.log("Ima in api")
+  console.log("Ima in api");
   ///posts/:id/like
-  return axios.patch(`${apiUrl}/comments/${commentId}/like`,{},config)
-  .then(res => res)
+  return axios
+    .patch(`${apiUrl}/comments/${commentId}/like`, {}, config)
+    .then(res => res)
     .catch(err => err);
-}
+};
 export const getCatagories = () => {
   return axios
     .get(`${apiUrl}/categories`)
     .then(res => res)
     .catch(error => error);
+};
+
+export const getPosts = () => {
+  return axios
+    .get(`${apiUrl}/posts`)
+    .then(res => res)
+    .catch(err => err);
 };
 
 export const signOut = token => {

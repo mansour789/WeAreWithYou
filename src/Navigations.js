@@ -15,6 +15,7 @@ import NewComment from './screens/comments/NewComment';
 import UserPost from './screens/Posts/UserPost'
 import EditPost from './screens/Posts/EditPost'
 import Aboutus from './screens/tabs/Aboutus';
+import HomePost from './screens/tabs/HomePosts';
 
 const homeStack = createStackNavigator({
     Home: { 
@@ -28,6 +29,16 @@ const homeStack = createStackNavigator({
     },
     Post: {  
       screen: Post, 
+      
+    },
+    HomePost : {  
+      screen: HomePost, 
+      navigationOptions:{
+        title  : " الرئيسية",
+        headerStyle: {
+          backgroundColor: '#C53364',
+        }
+      }
       
     },
     Personal: {  
@@ -122,8 +133,8 @@ const  Apppw = createBottomTabNavigator({
         )
       },
     },
-    Aboutus: {
-      screen: Aboutus, 
+    HomePost: {
+      screen: HomePost, 
       navigationOptions: {
         showLabel: false,
         tabBarIcon: ({ focused }) => (
@@ -135,7 +146,7 @@ const  Apppw = createBottomTabNavigator({
     
   },    
   { 
-    initialRouteName : "Home", 
+    initialRouteName : "HomePost", 
     tabBarOptions: {
       activeTintColor: '#C53364',
       inactiveTintColor: 'gray',
