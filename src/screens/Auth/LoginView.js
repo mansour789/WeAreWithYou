@@ -39,7 +39,7 @@ export default class LoginView extends Component {
   };
 
   loginUser = (userName, password) => {
-    const screenProps = this.props.screenProps;
+    const screenProps = this.props.screenProps; 
     const { navigation } = this.props;
     loginUser(userName, password)
       .then(res => {
