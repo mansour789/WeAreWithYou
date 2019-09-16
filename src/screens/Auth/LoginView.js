@@ -65,7 +65,7 @@ export default class LoginView extends Component {
           userData._id
         );
         
-        navigation.navigate("Home");
+        navigation.navigate("HomePost");
       })
       .catch(err => {
         console.log(err);

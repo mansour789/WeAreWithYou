@@ -57,7 +57,7 @@ export default class SignUp extends Component {
           userData.photo,
           userData._id
         );
-        navigation.navigate("Home");
+        navigation.navigate("HomePost");
       })
       .catch(err => {
         console.log(err);
