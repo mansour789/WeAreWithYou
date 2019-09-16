@@ -11,7 +11,7 @@ import {
   Button
 } from "native-base";
 import ChooseTopic from "../components/ChooseTopic";
-import { sendPost } from "../../ApiConfig";
+import { sendPost, getAppPost } from "../../ApiConfig";
 // import { Platform } from "@unimodules/core";
 
 export default class NewPost extends Component {
@@ -36,7 +36,7 @@ export default class NewPost extends Component {
     const selected = this.state.selected
     const data = this.state.post
    
-    const addNewPost = this.props.navigation.getParam("addNewPost");
+    const getPostsFromData = this.props.navigation.getParam("getPosts");
     
 
     if (this.state.post) {
@@ -48,13 +48,16 @@ export default class NewPost extends Component {
             alert("تم إرسال حكايتك بنجاح");
               // console.log(res.data)
               console.log("res.data.post")
-              console.log(res.data.post)
-              addNewPost(res.data.post)
-            this.props.navigation.navigate("Post",{newPost: res.data.post});
+              // console.log(res.data.post)
+              getPostsFromData()
+                
+
+              
+              
           } else {
             alert(res.status);
           }
-        })
+        }).then(res => this.props.navigation.navigate("HomePost"))
         .catch(err => {
           // alert(err);
           console.log(err)

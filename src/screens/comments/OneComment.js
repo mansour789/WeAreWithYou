@@ -46,6 +46,7 @@ this.setState({likes})
      const currLikes = [...likes];
      console.log("currLikes ")
      console.log(currLikes)
+     const getAllComments = this.props.getAllComments
      const indexOfUser = currLikes.indexOf(userId);
      liked ? currLikes.splice(indexOfUser,1): currLikes.push(userId)
      
@@ -55,7 +56,7 @@ this.setState({likes})
      this.setState({liked: !liked, likes: currLikes}) 
      onLikeComment(token , id).then(res=>{
       // console.log(res) 
-      
+      getAllComments()
     }).catch(err => {
       console.log(err)
     })

@@ -32,6 +32,9 @@ postSearchHandler = (postSearchWord)=> {
       console.log(err)
     })
   }
+  filter = () => {
+    this.props.navigation.navigate("HomePost")
+}
 
   render() {
     let filterdCatagories = this.state.categoriesData.filter(
@@ -42,7 +45,7 @@ postSearchHandler = (postSearchWord)=> {
     return ( 
      
       <>
-        <StartPage postSearchHandler={this.postSearchHandler}/>
+        <StartPage postSearchHandler={this.postSearchHandler} filter={this.filter}/>
 
         
             {this.state.loading ? (

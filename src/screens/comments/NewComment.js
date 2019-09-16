@@ -26,7 +26,7 @@ export default class NewComment extends Component {
   sendComment = () => { 
     Keyboard.dismiss();
     const { navigation } = this.props;
-    const addNewComment = navigation.getParam("addNewComment");
+    const getAllComments = navigation.getParam("getAllComments");
     const id = navigation.getParam("id");
     const data = this.state.comment
     const token = this.props.screenProps.data
@@ -38,7 +38,7 @@ export default class NewComment extends Component {
             // console.log(res)
             
             
-            addNewComment(res.data.comment)
+            getAllComments()
             alert("تم إرسال تعليقك بنجاح");
             this.props.navigation.navigate("OnePost", {newComment: res.data.comment});
           } else {

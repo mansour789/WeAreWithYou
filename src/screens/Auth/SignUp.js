@@ -80,9 +80,13 @@ export default class SignUp extends Component {
     const { userName, password, passwordConfirmation } = this.state;
     if (userName && password && passwordConfirmation) {
       if (password === passwordConfirmation) {
-        // make sign up
+        if(password.length > 5){
+          // make sign up
+          this.regiesterUser(userName, password, passwordConfirmation);
 
-        this.regiesterUser(userName, password, passwordConfirmation);
+        }else{
+          alert("كلمة السر يجب أن تكون أكثر من ٦ أحرف");
+        }
       } else {
         alert("كلمة السر وتأكيد كلمة السر ليست متطابقة");
       }

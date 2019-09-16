@@ -22,9 +22,10 @@ class Comments extends Component {
                     return item._id
                   }
                 }}
-                renderItem={({ item }) => (
+                renderItem={({ item }) => ( 
                   <OneComment
                     id={item.id}
+                    getAllComments={this.props.getAllComments}
                     createdAt={item.createdAt}
                     content={item.content}
                     likes={item.likes}

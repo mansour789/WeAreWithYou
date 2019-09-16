@@ -18,8 +18,8 @@ import Aboutus from './screens/tabs/Aboutus';
 import HomePost from './screens/tabs/HomePosts';
 
 const homeStack = createStackNavigator({
-    Home: { 
-      screen: Home, 
+  HomePost: { 
+      screen: HomePost, 
       navigationOptions:{
         title  : "الصفحة الرئيسية",
         headerStyle: {
@@ -31,8 +31,8 @@ const homeStack = createStackNavigator({
       screen: Post, 
       
     },
-    HomePost : {  
-      screen: HomePost, 
+    Home : {  
+      screen: Home, 
       navigationOptions:{
         title  : " الرئيسية",
         headerStyle: {
@@ -116,14 +116,14 @@ const  Apppw = createBottomTabNavigator({
         )
       },
     },   
-    // SignUp: {
-    //   screen: SignUp,
+    // HomePost: {
+    //   screen: HomePost,
     //   navigationOptions: {
-    //     tabBarIcon: ({ focused, horizontal, tintColor }) => (
-    //       <Icon name="ios-options" size={30} style={{ color: 'gray'}} />
+    //     tabBarIcon: ({ focused }) => (
+    //       <Icon name="ios-home" size={30} style={{ color: focused ? '#C53364': 'grey'}} />
     //     )
     //   },
-    // },   
+   // },   
     Personal: {
       screen: Personal,
       navigationOptions: {
@@ -133,8 +133,8 @@ const  Apppw = createBottomTabNavigator({
         )
       },
     },
-    HomePost: {
-      screen: HomePost, 
+    Aboutus: {
+      screen: Aboutus, 
       navigationOptions: {
         showLabel: false,
         tabBarIcon: ({ focused }) => (
@@ -146,7 +146,7 @@ const  Apppw = createBottomTabNavigator({
     
   },    
   { 
-    initialRouteName : "HomePost", 
+    initialRouteName : "Home",  
     tabBarOptions: {
       activeTintColor: '#C53364',
       inactiveTintColor: 'gray',

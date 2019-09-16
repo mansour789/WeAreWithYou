@@ -3,7 +3,7 @@ import { Text, View, FlatList } from "react-native";
 import { Container, Content, List, Body, Right } from "native-base";
 
 import PostDetails from "./PostDetails";
-import { getAppPost } from "../../ApiConfig";
+import { getAppPost, getPosts } from "../../ApiConfig";
 import ButtonAdd from "../components/ButtonAdd";
 import SpinnerLoading from "../components/SpinnerLoading"; 
 
@@ -61,11 +61,13 @@ export class Post extends Component {
       });
   };
   
-  addNewPost = (newPostObject)=> {
-   console.log("Iam on Post")
-    this.setState(prevState => ({
-      posts: [newPostObject, ...prevState.posts]
-    }))
+  getposts = ()=> {
+  //  console.log("Iam on Post")
+  //   this.setState(prevState => ({
+  //     posts: [newPostObject, ...prevState.posts]
+  //   }))
+  const getPosts = this.props.navigation.getParam("getPosts");
+  getPosts();
   }
 
   addPost = () => {
@@ -78,6 +80,7 @@ export class Post extends Component {
         posts: this.state.posts,
         addNewPost: this.addNewPost,
         topics,
+        getPosts: this.getposts
       });
     } else {
       this.props.navigation.navigate("LoginView");

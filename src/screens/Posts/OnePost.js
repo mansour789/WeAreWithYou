@@ -43,9 +43,9 @@ this.setState({likes})
   }
   addNewComment = (newCommentObject)=> {
    
-    this.setState(prevState => ({
-      comments: [newCommentObject, ...prevState.comments]
-    }))
+    // this.setState(prevState => ({
+    //   comments: [newCommentObject, ...prevState.comments]
+    // }))
   }
   getAllComments = () => {
     const { navigation } = this.props;
@@ -69,24 +69,24 @@ this.setState({likes})
 
       
   }
-  addComment = () => {
+  addComment = () => { 
     const { navigation } = this.props;
     const id = navigation.getParam("id")
     if(this.props.screenProps.data){
       
-      this.props.navigation.navigate("NewComment", {id, addNewComment: this.addNewComment})
+      this.props.navigation.navigate("NewComment", {id, getAllComments: this.getAllComments})
     }else{
       this.props.navigation.navigate("LoginView")
     }
   }
 
   onPressLike = ()=>{
+
     const { navigation } = this.props;
     const userId = this.props.screenProps.id
     // const likes = navigation.getParam("likes");
      const token = this.props.screenProps.data
      const postId = navigation.getParam("id");
-
      const { liked, likes } = this.state;
      const currLikes = [...likes];
      console.log("currLikes ")
@@ -94,13 +94,14 @@ this.setState({likes})
      const indexOfUser = currLikes.indexOf(userId);
      liked ? currLikes.splice(indexOfUser,1): currLikes.push(userId)
      
-   console.log("newLides")  
+     console.log("newLides")  
      console.log()
+     const getPosts = navigation.getParam("getPosts")
     
      this.setState({liked: !liked, likes: currLikes})
     onPressLike(token , postId).then(res=>{
-      // console.log(res) 
-      
+      getPosts()
+      console.log("mmmmmmmmmmmmm")  
     }).catch(err => {
       console.log(err)
     })
@@ -170,7 +171,7 @@ this.setState({likes})
               {this.state.loading ? (
                 <SpinnerLoading />
               ) : (
-                <Comments Comments={this.state.comments} userId={userId} token={token}/>
+                <Comments Comments={this.state.comments} getAllComments={this.getAllComments} userId={userId} token={token}/>
               )}
            
         </Content>

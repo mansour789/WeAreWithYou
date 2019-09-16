@@ -11,7 +11,7 @@ const expressPort = 3000
 //   apiUrl = apiUrls.production
 // }
 import axios from "axios";
-export const apiUrl = `http://localhost:${expressPort}`; 
+export const apiUrl = `http://localhost:${expressPort}`;  
 
 export const onPressLike = (token, postId) => {
   const config = {
