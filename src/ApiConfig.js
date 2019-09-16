@@ -11,7 +11,7 @@
 //   apiUrl = apiUrls.production
 // }
 import axios from "axios";
-export const apiUrl = `https://support-groups.herokuapp.com`;  
+export const apiUrl = `https://support-groups.herokuapp.com`;     
 
 export const onPressLike = (token, postId) => {
   const config = {

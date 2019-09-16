@@ -37,7 +37,7 @@ postSearchHandler = (postSearchWord)=> {
   }
   getposts = ()=>{
     getPosts().then(res => {
-      console.log(res.data.posts)
+      console.log(res)
       this.setState({
         allPosts: res.data.posts,
         loading: false
