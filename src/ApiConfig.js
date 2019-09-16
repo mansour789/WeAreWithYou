@@ -1,5 +1,5 @@
 // let apiUrl
-const expressPort = 3000
+// const expressPort = 3000
 // const apiUrls = {
 //   production: 'https://support-groups.herokuapp.com',
 //   development: `http://localhost:${expressPort}`
@@ -11,7 +11,7 @@ const expressPort = 3000
 //   apiUrl = apiUrls.production
 // }
 import axios from "axios";
-export const apiUrl = `http://localhost:${expressPort}`;  
+export const apiUrl = `https://support-groups.herokuapp.com`;  
 
 export const onPressLike = (token, postId) => {
   const config = {
